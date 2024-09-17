@@ -225,7 +225,9 @@
 
 .team_member-image img {
   filter: saturate(0);
+  object-fit: cover;
 }
+
 
 .team_member:hover img {
   filter: saturate(1);
