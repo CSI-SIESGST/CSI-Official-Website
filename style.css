@@ -184,6 +184,15 @@
     max-width: 10rem;
     display: flex;
   }
+  /* Hide Go Back text on mobile, show only icon */
+  .goback a {
+    font-size: 0;
+  }
+  .goback a svg {
+    font-size: 23px;
+    margin-right: 0;
+    vertical-align: middle;
+  }
 }
 
 .Logistic,
