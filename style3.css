@@ -1,6 +1,12 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 :root {
@@ -15,18 +21,21 @@
 .enigma,
 .inovation {
   font-family: 'Noto Sans JP', sans-serif;
-
-  margin: 100px;
+  margin: 2rem 1rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /*------------ event -------------------*/
 .event-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-  gap: 2rem;
-  margin: 4rem 5vw;
-  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
   list-style-type: none;
+  max-width: 1200px;
+  box-sizing: border-box;
 }
 
 .event-card-solo {
@@ -102,6 +111,7 @@
   color: #000000;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 0;
+  line-clamp: 0;
   overflow: hidden;
 }
 
@@ -215,13 +225,18 @@ circle {
   justify-content: center;
   border-radius: 25px;
   color: white;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .inovation-inner-card-text {
-  /* display: inline-block; */
   text-align: justify;
   text-justify: inter-word;
   width: 40%;
+  min-width: 300px;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* .inovation-card-main:hover {
@@ -254,30 +269,31 @@ circle {
 @media (max-width:1250px) {
   .inovation-inner-card-text {
     width: 90%;
+    min-width: unset;
   }
 
   .inovation-card-slideshow {
     border-radius: 25px;
     width: 100%;
-    height: 90%;
+    height: 300px;
+    max-height: 400px;
   }
 
   .slideshow-main {
-    width: 80%;
+    width: 100%;
+    max-width: 600px;
   }
 
   .inovation-inner-card-description {
     margin: 10px 0px 20px 0;
   }
-
 }
 
 @media (max-width:426px) {
-  .inovation-inner-card-description {
-    /* font-size: 25px; */
-  }
   .inovation-inner-card-text {
     width: 100%;
+    min-width: unset;
+    padding: 0.5rem;
   }
   .imgm{
     height: 100%;
@@ -290,6 +306,12 @@ circle {
   .swiper-slide {
     width: 100% !important;
     height: 100% !important;
+  }
+  .event-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem auto;
+    padding: 0 0.5rem;
   }
 }
 /* --------- /inovation---------------------------------*/
@@ -319,13 +341,18 @@ circle {
   justify-content: center;
   border-radius: 25px;
   color: white;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .enigma-inner-card-text {
-  /* display: inline-block; */
   text-align: justify;
   text-justify: inter-word;
   width: 40%;
+  min-width: 300px;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* .enigma-card-main:hover {
@@ -358,41 +385,39 @@ circle {
 @media (max-width:1250px) {
   .enigma-inner-card-text {
     width: 90%;
-    display: inline-block
+    min-width: unset;
   }
 
   .enigma-card-slideshow {
     border-radius: 25px;
     width: 100%;
-    height: 90%;
+    height: 300px;
+    max-height: 400px;
   }
 
   .enigma-runnerup2{
     width: 48%;
     float: right;
-
   }
   .enigma-runnerup{
     width: 48%;
-
   }
 
   .slideshow-main {
-    width: 80%;
+    width: 100%;
+    max-width: 600px;
   }
 
   .enigma-inner-card-description {
     margin: 10px 0px 20px 0;
   }
-
 }
 
 @media (max-width:426px) {
-  .enigma-inner-card-description {
-    /* font-size: 25px; */
-  }
   .enigma-inner-card-text {
     width: 100%;
+    min-width: unset;
+    padding: 0.5rem;
   }
   .imgm{
     height: 100%;
@@ -405,6 +430,12 @@ circle {
   .swiper-slide {
     width: 100% !important;
     height: 100% !important;
+  }
+  .enigma-runnerup2,
+  .enigma-runnerup {
+    width: 100%;
+    float: none;
+    margin-bottom: 1rem;
   }
 }
 
@@ -428,6 +459,8 @@ circle {
   width: 100%;
   padding-top: 50px !important;
   padding-bottom: 50px !important;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 @media (min-width: 426px) {
@@ -460,5 +493,15 @@ circle {
 
   .swiper-slide img {
     width: 100%;
+  }
+  
+  .event-card-grid {
+    padding: 0 0.5rem;
+  }
+  
+  .inovation-card-main,
+  .enigma-card-main {
+    margin: 1rem 0;
+    padding: 1rem;
   }
 }

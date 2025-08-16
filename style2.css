@@ -770,26 +770,37 @@ button {
 
 /* NAVBAR */
 
+/* Default transparent navbar */
+.navbar {
+  background-color: transparent !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
 @media (max-width: 987px) {
-
   .navbar {
-    background-color: #04042c;
+    background-color: rgba(4, 4, 44, 0.9) !important;
+    backdrop-filter: blur(15px);
   }
-
 }
 
 .navbar-nav .nav-link {
   font-family: var(--font-base);
   font-weight: 500;
   color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-brand img {
   height: 5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .navbar.scrolled {
-  background-color: #04042c !important;
+  background-color: rgba(4, 4, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 

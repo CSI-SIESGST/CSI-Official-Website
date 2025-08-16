@@ -1,0 +1,389 @@
+/* Spotlight Card Styles */
+.spotlight-card {
+  position: relative;
+  background: rgba(228, 228, 228, 0.08);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(225, 225, 225, 0.15);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  max-width: 95%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-color, rgba(0, 229, 255, 0.12)), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--spotlight-color, rgba(0, 229, 255, 0.1));
+  border-color: rgba(225, 225, 225, 0.25);
+}
+
+.spotlight-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Consistent glow effect for all cards */
+.spotlight-card-about,
+.spotlight-card-magazine,
+.spotlight-card-enigma,
+.spotlight-card-innovations,
+.spotlight-card-outreach {
+  --spotlight-color: rgba(0, 150, 255, 0.15);
+}
+
+/* Spotlight Card Styles */
+.spotlight-card {
+  position: relative;
+  background: rgba(228, 228, 228, 0.08);
+  border-radius: 20px;
+  padding: 1.2rem;
+  margin: 1.2rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(225, 225, 225, 0.15);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  max-width: 92%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-color, rgba(0, 229, 255, 0.12)), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--spotlight-color, rgba(0, 229, 255, 0.1));
+  border-color: rgba(225, 225, 225, 0.25);
+}
+
+.spotlight-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Consistent glow effect for all cards */
+.spotlight-card-about,
+.spotlight-card-magazine,
+.spotlight-card-enigma,
+.spotlight-card-innovations,
+.spotlight-card-outreach {
+  --spotlight-color: rgba(0, 150, 255, 0.15);
+}
+
+/* Make the inner card content more compact */
+.spotlight-card .inovation-card-main {
+  background-color: transparent;
+  border: none;
+  padding: 0.8rem;
+  box-shadow: none;
+  margin: 0;
+}
+
+.spotlight-card .enigma-card-main {
+  background-color: transparent;
+  border: none;
+  padding: 0.8rem;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* About Us section specific adjustments */
+.spotlight-card .innerdiv {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.spotlight-card .inovation-inner-card-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 55%;
+}
+
+.spotlight-card .imagem {
+  flex: 0 0 auto;
+  width: 40%;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spotlight-card .imgm {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific About Us layout fixes */
+.spotlight-card-about .innerdiv {
+  align-items: flex-start;
+}
+
+.spotlight-card-about .innerdiv#i2 {
+  flex-direction: row-reverse;
+}
+
+/* Compact headings */
+.spotlight-card .hm h2 {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 1.9rem;
+  margin: 0.8rem 0;
+}
+
+.spotlight-card .para-box__modifier {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  font-size: 0.92rem;
+  margin: 0.6rem 0;
+  text-align: justify;
+}
+
+.spotlight-card .inovation-inner-card-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.spotlight-card .enigma-card-title,
+.spotlight-card .inovation-card-title {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 1.8rem;
+  margin: 0.6rem 0;
+}
+
+.spotlight-card .enigma-card-winner,
+.spotlight-card .enigma-card-RunnerUp {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+/* Compact slideshow */
+.spotlight-card .slideshow-main {
+  flex: 0 0 auto;
+  width: 45%;
+  min-width: 280px;
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+.spotlight-card .enigma-card-slideshow,
+.spotlight-card .inovation-card-slideshow {
+  border-radius: 12px;
+  width: 100%;
+  margin: 1.5rem 0;
+  max-height: 220px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Magazine specific layout */
+.spotlight-card-magazine .inovation-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spotlight-card-magazine .magazine-content-wrapper,
+.spotlight-card-magazine .inovation-card-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.spotlight-card-magazine .inovation-inner-card-text {
+  flex: 1;
+  min-width: 320px;
+  max-width: 60%;
+}
+
+.spotlight-card-magazine .imagem {
+  flex: 0 0 auto;
+  width: 35%;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.spotlight-card-magazine .imgm {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.spotlight-card-magazine .imgm:hover {
+  transform: scale(1.02);
+}
+
+/* Magazine specific adjustments */
+.spotlight-card .buttonm {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.spotlight-card .btnm {
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: #DEE995;
+  color: black !important;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(222, 233, 149, 0.3);
+}
+
+.spotlight-card .btnm:hover {
+  background-color: #fff;
+  color: #0066ff !important;
+  border: 2px solid #0066ff;
+  box-shadow: 0 4px 15px rgba(222, 233, 149, 0.5);
+  transform: translateY(-2px);
+}
+
+.spotlight-card .btnm a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* Event recap cards layout */
+.spotlight-card-enigma .enigma-card-main,
+.spotlight-card-innovations .inovation-card-main {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.spotlight-card-enigma .enigma-inner-card-text,
+.spotlight-card-innovations .inovation-inner-card-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.spotlight-card-enigma .slideshow-main {
+  margin-top: 3rem;
+}
+
+.spotlight-card-outreach .inovation-card-main {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.spotlight-card-outreach .inovation-inner-card-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+  .spotlight-card .innerdiv {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .spotlight-card .inovation-inner-card-text,
+  .spotlight-card .imagem,
+  .spotlight-card .slideshow-main {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+  }
+  
+  .spotlight-card-enigma .enigma-card-main,
+  .spotlight-card-innovations .inovation-card-main,
+  .spotlight-card-outreach .inovation-card-main {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .spotlight-card {
+    padding: 1rem;
+    margin: 1rem 0;
+    max-width: 98%;
+  }
+  
+  .spotlight-card .hm h2 {
+    font-size: 1.6rem;
+  }
+  
+  .spotlight-card .enigma-card-title,
+  .spotlight-card .inovation-card-title {
+    font-size: 1.4rem;
+  }
+  
+  .spotlight-card .para-box__modifier,
+  .spotlight-card .inovation-inner-card-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation for consistent glow pulse effect */
+@keyframes spotlight-pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.spotlight-card.pulse::before {
+  animation: spotlight-pulse 3s ease-in-out infinite;
+}
