@@ -29,6 +29,14 @@
   margin-bottom: 50px;
 }
 
+/* Show only the default section (Faculty) until script.js applies the filter.
+   Without this the browser begins downloading every team's photos while parsing,
+   even though the filter hides them a moment later. The :not() keeps this ahead
+   of the 576px rule below, and script.js still overrides it with inline styles. */
+.store-product:not(.Faculty) {
+  display: none;
+}
+
 .bg {
   background: #131B24;
   background: linear-gradient(#000000, #103054);
