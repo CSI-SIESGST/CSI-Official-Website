@@ -1071,7 +1071,7 @@ button {
   font-weight: 600;
   color: #cbd5e1 !important;
   background: transparent !important;
-  padding: 6px 16px !important;
+  padding: 6px clamp(8px, 0.9vw, 13px) !important;
   border: none !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
   transition: all 0.2s ease;
