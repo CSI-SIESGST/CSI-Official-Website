@@ -1,69 +1,155 @@
+
 const btns = document.querySelectorAll(".bt");
 const storeProducts = document.querySelectorAll(".store-product");
+const teamDesc = document.querySelector(".team-desc");
 
 function applyFilter(filter) {
   storeProducts.forEach((product) => {
     if (product.classList.contains(filter)) {
       product.style.display = "block";
-      // Images start out lazy so hidden teams are never downloaded. Chrome will
-      // not fetch a lazy image that began inside a display:none card, so switch
-      // it to eager once the card is actually shown.
-      product.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-        img.loading = "eager";
-      });
     } else {
       product.style.display = "none";
     }
   });
 }
 
-for (i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", (e) => {
-      e.preventDefault();
-      applyFilter(e.target.dataset.filter);
-    });
-  }
+btns.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    // Remove active from all
+    btns.forEach(b => b.classList.remove('active'));
+    // Add active to clicked
+    const target = e.currentTarget;
+    target.classList.add('active');
+    
+    // Auto-scroll the clicked pill to the center on mobile
+    target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    
+    // Update description text
+    const desc = target.getAttribute('data-desc');
+    if(desc && teamDesc) {
+      teamDesc.textContent = desc;
+    }
+    
+    // Apply filter
+    applyFilter(target.dataset.filter);
+  });
+});
 
-// Show only the pre-selected team on load; without this every team renders at once
-const initialOption = document.querySelector(".menu li.active") || document.querySelector(".menu li");
+// Show only the pre-selected team on load
+const initialOption = document.querySelector(".team-nav li.active") || document.querySelector(".team-nav li");
 if (initialOption) {
   applyFilter(initialOption.dataset.filter);
 }
 
-const dropdowns=document.querySelectorAll('.team');
-// Loop through all dropdown elements
-dropdowns.forEach(dropdown => {
- // Get inner elements from each dropdown
-  const select=dropdown.querySelector('.select');
-  const caret=dropdown.querySelector('.caret');
-  const menu=dropdown.querySelector('.menu');
-  const options=dropdown.querySelectorAll('.menu li');
-  const selected=dropdown.querySelector('.selected');
-  select.addEventListener('click',()=>{
-    // Add the clicked select styles to the select element
-    select.classList.toggle('select-clicked');
-    // Add the rotate styles to the caret element
-    caret.classList.toggle('caret-rotate');
-    // Add the open styles to the menu element
-    menu.classList.toggle('menu-open');
-   });
+/* ================================================================
+   CYBER TERMINAL NAVBAR LOGIC
+   ================================================================ */
+const mainNav = document.getElementById('main-window-nav');
+const teamNavToggler = document.getElementById('teamNavToggler');
+const teamNavCollapse = document.getElementById('navbarNavMain');
 
-   options.forEach(option=>{
-    // Addaclick event to the option element
-    option.addEventListener('click',() => {
-       // Change selected inner text to clicked option inner text
-       selected.innerText=option.innerText;
-      // Add the clicked select styles to the select element
-       select.classList.remove('select-clicked');
-      // Add the rotate styles to the caret element
-       caret.classList.remove('caret-rotate');
-        menu.classList.remove('menu-open');
-        // Remove active class from all option elements
-        options.forEach(option => {
-          option.classList.remove('active');
-        });
-        // Add active class to clicked option element
-        option.classList.add('active');
-      });
+// 1. Dynamic frosted background on scroll
+function handleNavScroll() {
+  if (!mainNav) return;
+  if (window.scrollY > 30) {
+    mainNav.classList.add('scrolled');
+  } else {
+    mainNav.classList.remove('scrolled');
+  }
+}
+
+window.addEventListener('scroll', handleNavScroll, { passive: true });
+handleNavScroll(); // Run on initial load
+
+// 2. Mobile hamburger menu toggle
+if (teamNavToggler && teamNavCollapse) {
+  let lastTeamToggle = 0;
+  const toggleTeamMenu = (e) => {
+    const now = Date.now();
+    if (now - lastTeamToggle < 400) {
+      if (e) {
+        if (e.cancelable) e.preventDefault();
+        e.stopPropagation();
+      }
+      return;
+    }
+    lastTeamToggle = now;
+    if (e) {
+      if (e.cancelable && e.type !== 'pointerdown') e.preventDefault();
+      e.stopPropagation();
+    }
+    const willShow = !teamNavCollapse.classList.contains('show');
+    teamNavCollapse.classList.toggle('show', willShow);
+    teamNavToggler.classList.toggle('collapsed', !willShow);
+    teamNavToggler.setAttribute('aria-expanded', String(willShow));
+    if (mainNav) mainNav.classList.toggle('has-menu-open', willShow);
+  };
+
+  const closeTeamMenu = () => {
+    if (Date.now() - lastTeamToggle < 400) return;
+    if (teamNavCollapse.classList.contains('show')) {
+      teamNavCollapse.classList.remove('show');
+      teamNavToggler.classList.add('collapsed');
+      teamNavToggler.setAttribute('aria-expanded', 'false');
+      if (mainNav) mainNav.classList.remove('has-menu-open');
+    }
+  };
+
+  let handledByPointer = false;
+  teamNavToggler.addEventListener('pointerdown', (e) => {
+    if (e.button === 0 || e.pointerType === 'touch') {
+      handledByPointer = true;
+      toggleTeamMenu(e);
+      setTimeout(() => { handledByPointer = false; }, 500);
+    }
+  });
+  teamNavToggler.addEventListener('click', (e) => {
+    if (handledByPointer) {
+      if (e.cancelable) e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    toggleTeamMenu(e);
+  });
+
+  // Intercept any tap on the entire right side of the navbar header (all the way to the right screen edge)
+  if (mainNav) {
+    mainNav.addEventListener('pointerdown', (e) => {
+      if (window.innerWidth <= 991) {
+        if (e.target.closest('#teamNavToggler, .cyber-hamburger-btn')) return;
+        const rect = mainNav.getBoundingClientRect();
+        if (e.clientY <= (rect.top + 60) && e.clientX >= (window.innerWidth - 110)) {
+          toggleTeamMenu(e);
+        }
+      }
+    });
+  }
+
+  // Close mobile menu when clicking any nav link
+  teamNavCollapse.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeTeamMenu();
     });
   });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (teamNavCollapse.classList.contains('show')) {
+      if (Date.now() - lastTeamToggle < 400) return;
+      if (e.target.closest('#teamNavToggler, .cyber-hamburger-btn')) return;
+      if (!mainNav.contains(e.target)) {
+        closeTeamMenu();
+      }
+    }
+  });
+
+  // Flag internal navigation when returning to index.html
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="index.html"]');
+    if (link) {
+      try { sessionStorage.setItem('csi_nav_from_team', '1'); } catch (err) {}
+    }
+  });
+}

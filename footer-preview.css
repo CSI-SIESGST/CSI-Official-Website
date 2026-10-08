@@ -1,0 +1,315 @@
+/* ==========================================================================
+   MODERN CYBER FOOTER — STANDALONE PREVIEW CSS
+   Matches reference design with giant outline watermark & minimal grid
+   ========================================================================== */
+
+/* ── Base Reset & Background ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ── Footer Section Container ─────────────────────────────────────────── */
+.modern-cyber-footer {
+  position: relative;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #ffffff;
+  padding: 45px 0 25px;
+  overflow: hidden;
+  border-top: 1px solid rgba(var(--csi-accent-rgb), 0.2);
+}
+
+.footer-container {
+  max-width: 1240px;
+}
+
+/* ── Top Navigation & Brand Block ─────────────────────────────────────── */
+.footer-top-grid {
+  margin-bottom: 35px;
+}
+
+/* Brand Column (Left) */
+.footer-brand-col {
+  padding-right: 20px;
+}
+
+.footer-tagline {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  font-weight: 400;
+  max-width: 340px;
+  margin-bottom: 24px;
+}
+
+/* Social Icon Buttons Row */
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--csi-accent-rgb), 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.footer-social-btn:hover {
+  background: rgba(var(--csi-accent-rgb), 0.18);
+  border-color: rgba(var(--csi-accent-rgb), 0.6);
+  color: var(--csi-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(var(--csi-accent-rgb), 0.25);
+}
+
+/* Navigation Columns (Right) */
+.footer-nav-col {
+  position: relative;
+  padding-top: 14px;
+}
+
+/* Thin Top Divider Line above each column */
+.footer-nav-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.footer-column-title {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-link-item a {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-link-item a:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Tag/Badge inside link */
+.footer-link-badge {
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(var(--csi-accent-rgb), 0.1);
+  border: 1px solid rgba(var(--csi-accent-rgb), 0.35);
+  color: var(--csi-accent);
+  text-transform: uppercase;
+}
+
+.footer-link-badge.badge-cyan {
+  background: rgba(var(--csi-accent-rgb), 0.15);
+  border-color: rgba(var(--csi-accent-rgb), 0.5);
+  color: var(--csi-accent);
+}
+
+/* ── Giant Outlined Watermark Typography ──────────────────────────────── */
+.footer-watermark-wrapper {
+  width: 100%;
+  text-align: center;
+  margin: 40px 0 20px;
+  padding: 10px 0;
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+}
+
+.footer-watermark-text {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: clamp(2.8rem, 8.8vw, 8.2rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 1;
+  transition: -webkit-text-stroke 0.3s ease, filter 0.3s ease;
+  animation: footer-watermark-flicker 5.5s infinite linear;
+}
+
+@keyframes footer-watermark-flicker {
+  0%, 18.999%, 23%, 31.999%, 34%, 69.999%, 73%, 100% {
+    opacity: 0.9;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(0 0 10px rgba(var(--csi-accent-rgb), 0.4));
+  }
+  19%, 21% {
+    opacity: 0.15;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+    filter: none;
+  }
+  21.5% {
+    opacity: 1;
+    -webkit-text-stroke: 1.8px rgba(255, 255, 255, 0.7);
+    filter: drop-shadow(0 0 18px rgba(var(--csi-accent-rgb), 0.75)) drop-shadow(0 0 2px #ffffff);
+  }
+  22% {
+    opacity: 0.22;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    filter: none;
+  }
+  32%, 33% {
+    opacity: 0.28;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.12);
+    filter: none;
+  }
+  70%, 72% {
+    opacity: 0.12;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+    filter: none;
+  }
+  71% {
+    opacity: 0.95;
+    -webkit-text-stroke: 1.8px rgba(255, 255, 255, 0.65);
+    filter: drop-shadow(0 0 15px rgba(var(--csi-accent-rgb), 0.6)) drop-shadow(0 0 1px #ffffff);
+  }
+}
+
+.footer-watermark-text:hover {
+  -webkit-text-stroke: 1.8px rgba(255, 255, 255, 0.85);
+  filter: drop-shadow(0 0 28px rgba(var(--csi-accent-rgb), 0.85)) drop-shadow(0 0 4px #ffffff);
+  opacity: 1;
+}
+
+/* ── Bottom Sub-Footer Credits & Legal Bar ────────────────────────────── */
+.footer-bottom-bar {
+  margin-top: 30px;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-copyright {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.footer-copyright .slash-sep {
+  color: #475569;
+  margin: 0 4px;
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-legal-link {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-link:hover {
+  color: var(--csi-accent);
+}
+
+/* ── Responsive Media Queries ─────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .modern-cyber-footer {
+    padding: 60px 0 24px;
+  }
+
+  .footer-top-grid {
+    margin-bottom: 40px;
+  }
+
+  .footer-nav-col {
+    margin-top: 30px;
+  }
+
+  .footer-watermark-text {
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 768px) {
+  .modern-cyber-footer {
+    padding: 40px 0 20px !important;
+  }
+
+  .footer-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+  }
+
+  .footer-watermark-text {
+    font-size: clamp(1.4rem, 6.5vw, 2.5rem) !important;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.04em !important;
+    word-break: break-word !important;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-legal-links {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}

@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /*       our team           */
 
 /* .team {
@@ -38,15 +42,17 @@
 }
 
 .bg {
-  background: #131B24;
-  background: linear-gradient(#000000, #103054);
+  background-color: #000000;
+  background-image: url('images/cyber-dots-bg.svg');
+  background-size: 100px 100px;
+  /* background-attachment removed for scroll perf */
 }
 
 /*       our team           */
 
 
 .team {
-  background-color: #1f2641;
+  background-color: #0a0b0e;
   width: 60vw;
   position: relative;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -73,8 +79,8 @@
 }
 
 .select-clicked {
-  border: 2px #26489a solid;
-  box-shadow: 0 0 0.8rem #26489a;
+  border: 2px #7b93e6 solid;
+  box-shadow: 0 0 0.8rem #7b93e6;
 }
 
 .select:hover {
@@ -126,7 +132,7 @@
 
 .active {
   background: #23242a;
-  color: #dee995;
+  color: #6777b7;
 }
 
 .menu-open {
@@ -134,28 +140,62 @@
   opacity: 1;
 }
 
-.title{
+.title {
   color: aliceblue;
 }
 
-.goback{
-    position: absolute;
-    top: 6%;
-    left: 3%;
-    background-color: #dee995;
-    color: #13182a;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    font-size: larger;
-    padding: 0.3% 0.7%;
+/* ==========================================================================
+   TOP-LEFT BACK BUTTON
+   ========================================================================== */
+.membership-top-bar {
+  position: absolute;
+  top: 1.75rem;
+  left: 2rem;
+  z-index: 100;
 }
-.goback svg{
-  margin-right: 8px;
-  margin-bottom: 4px;
+
+.membership-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(6, 12, 30, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #ffffff !important;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.55rem 1.15rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-.goback a{
-  text-decoration: none;
-  color: #13182a;
+
+.membership-back-btn i {
+  font-size: 1.2rem;
+  transition: transform 0.25s ease;
+}
+
+.membership-back-btn:hover {
+  background: rgba(12, 22, 52, 0.9);
+  border-color: #38bdf8;
+  color: #38bdf8 !important;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+}
+
+.membership-back-btn:hover i {
+  transform: translateX(-3px);
+}
+
+@media (max-width: 600px) {
+  .membership-top-bar {
+    top: 1.25rem;
+    left: 1.25rem;
+  }
 }
 
 /*   
@@ -192,10 +232,12 @@
     max-width: 10rem;
     display: flex;
   }
+
   /* Hide Go Back text on mobile, show only icon */
   .goback a {
     font-size: 0;
   }
+
   .goback a svg {
     font-size: 23px;
     margin-right: 0;
@@ -215,7 +257,7 @@
 }
 
 .team_member {
-  background-color: #13182a;
+  background-color: #0a0b0e;
   padding: 2rem;
   border: 1px solid transparent;
   transition: ease 0.3s;
@@ -251,7 +293,7 @@
   filter: saturate(1);
 }
 
-.team_member-info{
+.team_member-info {
   text-align: center;
   margin-top: 1.4rem;
   color: #9fa5b5;
@@ -265,14 +307,14 @@
   right: 12%;
   /* display: flex; */
   flex-direction: column;
-  background-color: #dee995;
+  background-color: #6777b7;
   border-radius: 1rem 1rem 0 0;
   box-shadow: -2rem 0 2rem rgba(0, 0, 0, 0.3);
 }
 
 .team_member-socials svg {
   text-decoration: none !important;
-  color: #13182a;
+  color: #0a0b0e;
   margin-top: 5px;
 }
 
@@ -310,40 +352,691 @@
   }
 } */
 
-@media screen and (max-width: 1400px){
-  .team_member{
+@media screen and (max-width: 1400px) {
+  .team_member {
     height: 402px;
   }
-  .team_member-image{
+
+  .team_member-image {
     height: 200px;
   }
 }
 
 
-@media screen and (max-width: 768px){
-  .team_member{
+@media screen and (max-width: 768px) {
+  .team_member {
     height: 350px;
   }
-  .team_member-image{
+
+  .team_member-image {
     height: 150px;
   }
 }
 
-@media screen and (max-width: 520px){
-  .team_member{
+@media screen and (max-width: 520px) {
+  .team_member {
     height: 295px;
   }
-  .team_member-image{
+
+  .team_member-image {
     height: 80px;
   }
-  .team_member-info h4{
+
+  .team_member-info h4 {
     font-size: medium;
   }
-  .team_member-info p{
+
+  .team_member-info p {
     font-size: medium;
   }
+
   .team_member:hover .team_member-socials {
     top: 88.5%;
     /* transition: 0.3s; */
+  }
+}
+
+/* ================================================================
+   CYBER TERMINAL NAVBAR (TEAM PAGE)
+   ================================================================ */
+.terminal-nav-unified {
+  height: auto !important;
+  min-height: 64px !important;
+  padding: 12px 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: 'JetBrains Mono', 'Space Mono', 'Consolas', monospace !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 99999 !important;
+  transition: background 0.35s ease, border-color 0.35s ease !important;
+}
+
+.main-window-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  z-index: 999999 !important;
+}
+
+.main-window-nav.scrolled {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.terminal-nav-unified .container-fluid {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 16px !important;
+  background: transparent !important;
+}
+
+.terminal-nav-unified .navbar-toggler {
+  border: 1px solid rgba(73, 87, 150, 0.4) !important;
+  background: rgba(6, 8, 16, 0.85) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.terminal-nav-unified .navbar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
+}
+
+.terminal-nav-links {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  margin: 0 auto !important;
+  padding: 6px 10px !important;
+  border: none !important;
+  background: transparent !important;
+  list-style: none !important;
+}
+
+.terminal-nav-links .nav-link {
+  font-family: 'JetBrains Mono', 'Space Mono', 'Consolas', monospace !important;
+  font-size: 13px !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 600;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+  padding: 6px 16px !important;
+  border: none !important;
+  text-decoration: none !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.terminal-nav-links .nav-link:hover {
+  color: #60a5fa !important;
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.6) !important;
+}
+
+.terminal-nav-links .nav-item.active .nav-link,
+.terminal-nav-links .nav-link.active {
+  color: #60a5fa !important;
+  text-shadow: 0 0 14px rgba(96, 165, 250, 0.7) !important;
+  border: none !important;
+  border-bottom: none !important;
+}
+
+@media (min-width: 992px) {
+  .terminal-nav-links .nav-link-text::before {
+    content: '[';
+    margin-right: 1px;
+  }
+  .terminal-nav-links .nav-link-text::after {
+    content: ']';
+    margin-left: 1px;
+  }
+}
+
+
+.nav-item-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important;
+}
+
+.nav-logo-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: transform 0.25s ease, opacity 0.25s ease !important;
+}
+
+.nav-center-emblem {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.nav-logo-link:hover .nav-center-emblem {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+}
+
+/* Mobile Brand Logo Link (Visible only on mobile - Logo Only) */
+.mobile-nav-brand {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  pointer-events: auto !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.75));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.mobile-nav-brand:hover .mobile-nav-logo-img,
+.mobile-nav-brand:focus .mobile-nav-logo-img {
+  transform: scale(1.08) rotate(-4deg);
+  filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.95));
+}
+
+.mobile-nav-brand:active .mobile-nav-logo-img {
+  transform: scale(0.92);
+}
+
+/* Cyber / Terminal Animated Hamburger Button (Clean Floating 3-Lines - NO BOX) */
+.terminal-nav-unified .cyber-hamburger-btn,
+.cyber-hamburger-btn {
+  display: none;
+  width: 54px !important;
+  height: 50px !important;
+  min-width: 54px !important;
+  min-height: 50px !important;
+  padding: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  outline: none !important;
+  position: relative !important;
+  z-index: 9999999 !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: transform 0.18s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Massive expanded touch hit zone extending far to the right (screen edge) and left */
+.cyber-hamburger-btn::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -18px !important;
+  bottom: -18px !important;
+  left: -28px !important;
+  right: -28px !important;
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+
+.cyber-hamburger-btn:focus,
+.cyber-hamburger-btn:hover {
+  outline: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cyber-hamburger-btn:active {
+  transform: scale(0.92);
+}
+
+.cyber-hamburger-box {
+  width: 26px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.cyber-hamburger-box * {
+  pointer-events: none !important;
+}
+
+.cyber-hamburger-line {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(123, 147, 230, 0.6);
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: pointer !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease,
+              width 0.25s ease,
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+  transform-origin: center;
+}
+
+/* Micro tech asymmetry: Line 2 is ALWAYS Cyber Blue (NEVER turns white) */
+.cyber-hamburger-line.line-2,
+.cyber-hamburger-btn:hover .cyber-hamburger-line.line-2,
+.cyber-hamburger-btn:focus .cyber-hamburger-line.line-2,
+.cyber-hamburger-btn:active .cyber-hamburger-line.line-2 {
+  width: 19px !important;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.95), 0 0 20px rgba(56, 189, 248, 0.6) !important;
+  opacity: 1 !important;
+}
+
+/* Lines 1 and 3 on hover: bright pure white glow */
+.cyber-hamburger-btn:hover .cyber-hamburger-line.line-1,
+.cyber-hamburger-btn:hover .cyber-hamburger-line.line-3 {
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+}
+
+/* Morph to cyber "X" when active / expanded */
+.cyber-hamburger-btn:not(.collapsed) .cyber-hamburger-line.line-1,
+.cyber-hamburger-btn[aria-expanded="true"] .cyber-hamburger-line.line-1 {
+  transform: translateY(7.5px) rotate(45deg);
+  width: 26px;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 14px #38bdf8 !important;
+}
+
+.cyber-hamburger-btn:not(.collapsed) .cyber-hamburger-line.line-2,
+.cyber-hamburger-btn[aria-expanded="true"] .cyber-hamburger-line.line-2 {
+  opacity: 0 !important;
+  transform: scaleX(0) !important;
+}
+
+.cyber-hamburger-btn:not(.collapsed) .cyber-hamburger-line.line-3,
+.cyber-hamburger-btn[aria-expanded="true"] .cyber-hamburger-line.line-3 {
+  transform: translateY(-7.5px) rotate(-45deg);
+  width: 26px;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 14px #38bdf8 !important;
+}
+
+.cyber-hamburger-btn:not(.collapsed),
+.cyber-hamburger-btn[aria-expanded="true"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 991px) {
+  /* Initially completely transparent */
+  .main-window-nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important;
+    padding: 14px 0 !important;
+    background: transparent !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    border-bottom: 1px solid transparent !important;
+    box-shadow: none !important;
+    transition: background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                -webkit-backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.35s ease !important;
+  }
+
+  /* Scrolled state on mobile: Sleek Black Gradient (No Glassmorphism) */
+  .main-window-nav.scrolled {
+    background: linear-gradient(180deg, #090c13 0%, #05070a 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.92) !important;
+    padding: 10px 0 !important;
+  }
+
+  /* When mobile menu is opened, solid sleek black gradient */
+  .main-window-nav.has-menu-open,
+  .main-window-nav:has(.navbar-collapse.show) {
+    background: linear-gradient(180deg, #090c13 0%, #05070a 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95) !important;
+  }
+
+  .terminal-nav-unified .container-fluid {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+  }
+
+  .mobile-nav-brand {
+    display: inline-flex !important;
+  }
+
+  .cyber-hamburger-btn {
+    display: inline-flex !important;
+    margin-right: -16px !important;
+    padding-right: 16px !important;
+    padding-left: 20px !important;
+    min-width: 64px !important;
+    min-height: 52px !important;
+  }
+
+  .terminal-nav-unified .navbar-collapse {
+    background: linear-gradient(180deg, #0c101a 0%, #05070a 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 18px !important;
+    padding: 12px 10px !important;
+    margin-top: 10px !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95) !important;
+    pointer-events: auto !important;
+    width: 100% !important;
+  }
+
+  .terminal-nav-links {
+    flex-direction: column !important;
+    gap: 4px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .terminal-nav-links .nav-item {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .terminal-nav-links .nav-link {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 13px 16px !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    text-decoration: none !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* No brackets on mobile! */
+  .terminal-nav-links .nav-link-text::before,
+  .terminal-nav-links .nav-link-text::after {
+    display: none !important;
+    content: '' !important;
+  }
+
+  .mobile-nav-num {
+    font-family: 'Space Mono', 'JetBrains Mono', monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    color: #60a5fa !important;
+    opacity: 0.75;
+    min-width: 24px;
+    text-align: left;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .terminal-nav-links .nav-link-text {
+    font-family: 'Orbitron', 'Space Mono', 'JetBrains Mono', monospace !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em !important;
+    color: #e2e8f0 !important;
+    flex: 1;
+    text-align: left;
+    margin-left: 12px;
+    transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+  }
+
+  .mobile-nav-arrow {
+    width: 16px;
+    height: 16px;
+    color: #64748b;
+    stroke: currentColor;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Hover & Active / Touch feedback */
+  .terminal-nav-links .nav-link:hover,
+  .terminal-nav-links .nav-link:active,
+  .terminal-nav-links .nav-link.active {
+    background: rgba(96, 165, 250, 0.1) !important;
+    border-color: rgba(96, 165, 250, 0.25) !important;
+  }
+
+  .terminal-nav-links .nav-link:hover .mobile-nav-num,
+  .terminal-nav-links .nav-link:active .mobile-nav-num {
+    opacity: 1;
+    color: #93c5fd !important;
+  }
+
+  .terminal-nav-links .nav-link:hover .nav-link-text,
+  .terminal-nav-links .nav-link:active .nav-link-text {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(96, 165, 250, 0.6) !important;
+    transform: translateX(2px);
+  }
+
+  .terminal-nav-links .nav-link:hover .mobile-nav-arrow,
+  .terminal-nav-links .nav-link:active .mobile-nav-arrow {
+    color: #60a5fa !important;
+    transform: translate(2px, -2px);
+  }
+
+  /* Bottom status strip in mobile drawer */
+  .mobile-nav-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 8px;
+    padding: 12px 6px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-nav-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: #64748b;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60a5fa;
+    box-shadow: 0 0 8px #60a5fa;
+    animation: statusPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes statusPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .terminal-nav-links .nav-item-logo {
+    display: none !important;
+  }
+}
+
+/* ==================================================
+   MINIMALIST BLACK PRELOADER: TUBELIGHT LIQUID LIGHT FILL
+/* ==================================================
+   LUXURY CHARCOAL-COBALT PRELOADER WITH FILM GRAIN & CURTAIN LIFT
+================================================== */
+.csi-preloader {
+  display: none;
+}
+
+html.show-csi-loader .csi-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100000000 !important;
+  background-color: #06080d !important;
+  background-image: radial-gradient(ellipse at 50% 48%, #0d1220 0%, #070912 55%, #040508 100%) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.72s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Subtle Film Noise Grain Overlay (Ultra-fast cached PNG, Zero repaints, No mix-blend-mode) */
+.csi-preloader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.038;
+  background-image: url("assets/noise.png");
+  background-repeat: repeat;
+  z-index: 1;
+}
+
+/* Subtle Curtain Edge Indicator at bottom */
+.csi-preloader::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(73, 87, 150, 0.5), transparent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Hide heavy pseudo-elements right before curtain lift to prevent GPU stutter */
+.csi-preloader.hide-grain::before,
+.csi-preloader.hide-grain::after {
+  display: none !important;
+}
+
+/* Curtain Slide Up Exit: Smooth upward stage curtain pull at 60/120fps */
+.csi-preloader.fade-out,
+.csi-preloader.curtain-up {
+  transform: translate3d(0, -100%, 0) !important;
+  -webkit-transform: translate3d(0, -100%, 0) !important;
+  pointer-events: none !important;
+}
+
+/* PNG positioned dead center on desktop */
+.csi-preloader-logo-wrap {
+  position: relative;
+  z-index: 3;
+  width: min(220px, 58vw);
+  aspect-ratio: 544 / 304;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0);
+}
+
+.csi-preloader-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Layer 1: Dim Base PNG with original colors */
+.csi-preloader-dim {
+  opacity: 0.24;
+}
+
+/* Layer 2: Pure Solid Fill (Bottom to Top) with Soft Ambient Glow */
+.csi-preloader-fill {
+  opacity: 1;
+  clip-path: inset(calc(100% - var(--loader-p, 0%)) 0 0 0);
+  -webkit-clip-path: inset(calc(100% - var(--loader-p, 0%)) 0 0 0);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.38));
+  will-change: clip-path, filter;
+}
+
+@media (max-width: 768px) {
+  .csi-preloader-logo-wrap {
+    width: min(170px, 55vw);
+    transform: translateY(-45px);
   }
 }

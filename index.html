@@ -6,751 +6,1301 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CSI SIESGST</title>
-  <link rel="shortcut icon" href="./final-image1/CSI new Logo Crest Trans White.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <link rel="shortcut icon" href="./assets/CSI (WHITE) LOGO.png" type="image/x-icon">
+  <!-- Preconnect hints FIRST — before any font/CDN requests -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <link rel="icon" type="image/svg+xml" href="images/csi-emblem.svg" />
+  <link rel="shortcut icon" href="images/csi-emblem.png" type="image/png" />
+
+  <!-- Google Fonts (consolidated) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="style2.css" />
-  <link rel="stylesheet" href="style3.css" />
+  <link rel="stylesheet" href="style2.css?v=ultra2" />
+  <link rel="stylesheet" href="style3.css?v=galleryfix1" />
+  <link rel="stylesheet" href="contact-preview.css?v=glass2" />
+  <link rel="stylesheet" href="footer-preview.css" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
+  <!-- Scripts deferred — no longer render-blocking -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js" defer></script>
+  <!-- Preloader Gatekeeper: Strictly visible ONLY on home reload or direct landing; never on team/section navigation -->
+  <script>
+    (function () {
+      var isReload = false;
+      try {
+        var nav = performance.getEntriesByType('navigation');
+        if (nav && nav.length > 0) {
+          isReload = (nav[0].type === 'reload');
+        } else if (window.performance && window.performance.navigation) {
+          isReload = (window.performance.navigation.type === 1);
+        }
+      } catch (e) {}
 
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
+      var ref = document.referrer || '';
+      var isFromTeam = ref.indexOf('team.html') !== -1 || ref.indexOf('team') !== -1;
+      var isInternalNav = isFromTeam || (sessionStorage.getItem('csi_nav_from_team') === '1');
+      var hasSectionHash = window.location.hash && window.location.hash !== '#top' && window.location.hash !== '';
+
+      if (isReload) {
+        try { sessionStorage.removeItem('csi_nav_from_team'); } catch (e) {}
+        if (!hasSectionHash) {
+          document.documentElement.classList.add('show-csi-loader');
+        }
+      } else if (!isInternalNav && !hasSectionHash && (!ref || ref.indexOf(window.location.host) === -1)) {
+        document.documentElement.classList.add('show-csi-loader');
+      }
+    })();
+  </script>
 </head>
 
-<body>
-  <!-- NAVBAR STARTS -->
-  <div class="body-image">
-    <div id="particles-js"> </div>
-    <div class="myContent">
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-          <div class="navbar-brand">
-            <img src="./assets/CSI (WHITE) LOGO.png" alt="csi logo" />
-          </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto" id="#mainNav">
-              <li class="nav-item">
-                <a class="nav-link" href="#cm">ABOUT US</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#magzine">MAGAZINE</a>
-              </li>
-              <!-- <li class="nav-item" id="special">
-                <a class="nav-link" href="https://innovations-csi-siesgst.herokuapp.com/">INNOVATIONS 2K22</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="#event">EVENTS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="membership.html">MEMBERSHIP</a>
-              </li>
-              <li class="nav-item" id="underline">
-                <a class="nav-link" href="team.html">TEAM</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#sponsors">SPONSORS & CONTACT US</a>
-              </li>
-              <li>
-                <a href="ar-vr.html"></a>
-              </li>
-            </ul>
+<body id="top">
+  <!-- ================================================================
+       MINIMALIST BLACK PRELOADER: Bottom-to-Top White Fill
+       ================================================================ -->
+  <div id="csi-preloader" class="csi-preloader" aria-hidden="false">
+    <div class="csi-preloader-logo-wrap">
+      <!-- Dim base PNG with original colors -->
+      <img src="assets/CSI new Tans White-Photoroom.png?v=original-colors" alt="CSI Logo" class="csi-preloader-img csi-preloader-dim" />
+      <!-- Solid fill PNG with original colors (fills bottom to top) -->
+      <img src="assets/CSI new Tans White-Photoroom.png?v=original-colors" alt="CSI Logo" class="csi-preloader-img csi-preloader-fill" id="csiLoaderFill" />
+    </div>
+  </div>
+
+  <!-- MAIN WINDOW NAVBAR (Centered Navigation on Desktop, Sticky Cyber Nav with Brand & Animated Hamburger on Mobile) -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top main-window-nav terminal-nav-unified" id="main-window-nav">
+    <div class="container-fluid d-flex justify-content-between justify-content-lg-center align-items-center px-3 px-md-4">
+      <!-- Mobile-only Brand Logo linking to top -->
+      <a class="navbar-brand mobile-nav-brand d-inline-flex d-lg-none align-items-center" href="#top" title="Back to CSI Home" aria-label="CSI Home">
+        <img decoding="async" src="images/csi-emblem.svg" alt="CSI Logo" class="mobile-nav-logo-img" />
+      </a>
+
+      <!-- Cyber Animated Hamburger Button (Mobile Only) -->
+      <button class="navbar-toggler cyber-hamburger-btn d-inline-flex d-lg-none collapsed" type="button" data-bs-target="#navbarNavMain"
+        aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation" id="mainNavToggler">
+        <span class="cyber-hamburger-box">
+          <span class="cyber-hamburger-line line-1"></span>
+          <span class="cyber-hamburger-line line-2"></span>
+          <span class="cyber-hamburger-line line-3"></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center text-center" id="navbarNavMain">
+        <ul class="navbar-nav mx-auto terminal-nav-links justify-content-center align-items-center" id="mainNavOuter">
+          <li class="nav-item">
+            <a class="nav-link" href="#cm">
+              <span class="mobile-nav-num d-lg-none">01</span>
+              <span class="nav-link-text">ABOUT US</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#magzine">
+              <span class="mobile-nav-num d-lg-none">02</span>
+              <span class="nav-link-text">MAGAZINE</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#event">
+              <span class="mobile-nav-num d-lg-none">03</span>
+              <span class="nav-link-text">EVENTS</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+          <li class="nav-item nav-item-logo d-none d-lg-inline-flex">
+            <a class="nav-link nav-logo-link" href="#top" id="nav-brand-logo" title="Back to CSI Screen">
+              <img decoding="async" src="images/csi-emblem.svg" alt="CSI Logo" class="nav-center-emblem" />
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sponsors">
+              <span class="mobile-nav-num d-lg-none">04</span>
+              <span class="nav-link-text">SPONSORS</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">
+              <span class="mobile-nav-num d-lg-none">05</span>
+              <span class="nav-link-text">CONTACT US</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+          <li class="nav-item" id="underline">
+            <a class="nav-link" href="team.html">
+              <span class="mobile-nav-num d-lg-none">06</span>
+              <span class="nav-link-text">TEAM</span>
+              <svg class="mobile-nav-arrow d-lg-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-nav-footer d-lg-none">
+          <div class="mobile-nav-status">
+            <span class="status-dot"></span>
+            <span class="status-label">CSI SIES GST &bull; 2026-27</span>
           </div>
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 
-      <!-- NAVBAR ENDS -->
+  <!-- PHYSICAL MONITOR ZOOM STAGE (Fixed Viewport Stage) -->
+  <div class="hero-sticky-stage" id="hero-sticky-stage">
+    <!-- Interactive Background Dots Canvas (Behind monitor) -->
+    <canvas id="hero-bg-dots-canvas" class="hero-bg-dots-canvas"></canvas>
 
-      <!-- HERO STARTS -->
+    <div class="hero-zoom-container" id="hero-zoom-container">
+      <div class="monitor-stage-box" id="monitor-stage-box">
 
-      <section id="hero" class="min-vh-100 d-flex align-items-center">
-        <div class="container" id="hero-container">
-          <div class="row" id="hero-row">
-            <div class="col-12" id="hero-col">
-              <h1 data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="1000"
-                class="text-uppercase text-white fw-semibold display-1" id="hero-h1">
-                CSI - SIESGST
-              </h1>
-              <h5 class="text-white mt-3 mb-4" data-aos="flip-right" data-aos-easing="ease-out-cubic"
-                data-aos-duration="1000" id="hero-h5">
-                The CSI Campus Chapter of SIES-GST is a part of the well <br>
-                established network of student branches across the country<span> .</span>
-              </h5>
-              <div data-aos="zoom-out-right" data-aos-delay="300" class="hero-div">
-                <a href="#cm" class="btn btn-brand me-2">Get Started</a>
-                <a href="team.html" class="btn btn-brand me-2">Our TEAM</a>
+        <!-- SCREEN VIEWPORT (Clipped inside monitor display area on desktop, full screen on mobile) -->
+        <div class="monitor-screen-viewport" id="monitor-screen-viewport">
+          <div class="monitor-screen-inner unzoomed-locked" id="monitor-screen-inner">
+            <div class="terminal-stage">
+              <!-- Interactive Repulsion Dot Grid Canvas (Inside monitor) -->
+              <canvas id="terminal-dots-canvas" class="terminal-dots-canvas"></canvas>
+
+              <!-- Monitor Screen Top Centered Status Bar / Navbar (Exact Identical Markup) -->
+              <nav class="navbar navbar-expand-lg navbar-dark terminal-monitor-nav terminal-nav-unified"
+                id="terminal-monitor-nav">
+                <div class="container-fluid justify-content-center px-3 px-md-4">
+                  <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavInner" aria-controls="navbarNavInner" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-center text-center" id="navbarNavInner">
+                    <ul class="navbar-nav mx-auto terminal-nav-links justify-content-center align-items-center"
+                      id="mainNav">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#cm">[ABOUT US]</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#magzine">[MAGAZINE]</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#event">[EVENTS]</a>
+                      </li>
+                      <li class="nav-item nav-item-logo">
+                        <a class="nav-link nav-logo-link" href="#top" title="Back to CSI Screen">
+                          <img decoding="async" src="images/csi-emblem.svg" alt="CSI Logo" class="nav-center-emblem" />
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#sponsors">[SPONSORS]</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#contact">[CONTACT US]</a>
+                      </li>
+                      <li class="nav-item" id="underline-inner">
+                        <a class="nav-link" href="team.html">[TEAM]</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+              <!-- TERMINAL HERO MAIN CONTENT (Pure Massive CSI Centered) -->
+              <div class="terminal-hero-container">
+                <div class="terminal-hero-center">
+
+                  <!-- Pure Massive Centered CSI with Interactive LED Letters -->
+                  <div class="hero-csi-anchor" id="hero-csi-anchor">
+                    <div class="hero-csi-logo-wrap" id="hero-csi-logo">
+                      <img decoding="async" src="images/csi-emblem.svg" alt="CSI Emblem" class="hero-csi-top-logo" width="90px" />
+                    </div>
+                    <h1 class="terminal-main-csi-pure">
+                      <span class="led-letter active" id="led-c" data-letter="C" title="">C</span><span
+                        class="led-letter active" id="led-s" data-letter="S" title="">S</span><span
+                        class="led-letter active" id="led-i" data-letter="I" title="">I</span>
+                    </h1>
+                    <div class="hero-csi-subtext-wrap" id="hero-csi-subtext">
+                      <span class="hero-csi-subtitle">SIES GST</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Minimal Scroll / Enter Down Arrow Indicator (Only on zoomed out screen) -->
+                <div class="terminal-scroll-hint" id="terminal-enter-trigger" role="button" tabindex="0"
+                  title="Click or scroll to enter">
+                  <span class="hint-arrow">&darr;</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- PHYSICAL MONITOR DESK SCENE OVERLAY (Image from images/hero-desk-clean.webp) -->
+        <img decoding="async" src="./images/hero-desk-clean.webp" alt="Physical Monitor Desk Scene" class="hero-desk-frame-img"
+          id="hero-desk-frame-img" />
+
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SCROLL TRACK (Creates the scroll height for camera zoom interaction) -->
+  <div id="hero-scroll-track" class="hero-scroll-track"></div>
+
+  <!-- ABOUT US SECTION (Cinematic Team Showcase, Who Are We & Top Window / Horizontal Cards Spotlight) -->
+  <section id="cm" class="terminal-about-section">
+    <div class="container terminal-about-container">
+
+      <!-- Section Header -->
+      <div class="cyber-about-header" data-aos="fade-up">
+        <div class="cyber-section-index">
+          <span class="index-label">ABOUT US &bull; SIES GST CHAPTER</span>
+        </div>
+        <h2 class="cyber-about-hero-title">
+          THE ARCHITECTS OF INNOVATION
+        </h2>
+        <p class="cyber-about-hero-subtitle">
+          Computer Society of India &bull; SIES Graduate School of Technology Student Chapter
+        </p>
+      </div>
+
+      <!-- 1. CINEMATIC TEAM GROUP PHOTO SHOWCASE -->
+      <div class="team-showcase-container" data-aos="fade-up">
+        <div class="team-photo-frame">
+          <!-- Photo Wrapper: 100% Unobscured so all people are clearly visible -->
+          <div class="team-photo-wrapper">
+            <img decoding="async" src="images/csi-team-group.jpg" alt="CSI SIES GST Student Council" class="team-photo-img" loading="lazy" />
+
+            <!-- Minimalist Top Corner Tag (No Fat Box, In Empty Ceiling Space) -->
+            <div class="team-corner-badge">
+              <span class="pulse-indicator"></span>
+              <span class="team-corner-badge-text">CSI SIES GST COUNCIL</span>
+            </div>
+          </div>
+
+          <!-- Dedicated Caption Panel Below Photo (People are 100% Visible & Clear) -->
+          <div class="team-caption-panel">
+            <h3 class="team-caption-title">The team that made it happen</h3>
+            <div class="team-showcase-footer">
+              <span class="team-footer-year">ACADEMIC YEAR 2025 &ndash; 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 2. WHO ARE WE (CSI KYA HAI & SIES GST CHAPTER) -->
+      <div class="about-story-block" data-aos="fade-up">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="story-label-wrapper">
+              <span class="story-label">// WHO ARE WE</span>
+            </div>
+            <h3 class="story-heading">
+              India’s Largest Tech Network, <br class="d-none d-md-inline" />
+              <span class="highlight-cyan">Powered by Students</span>
+            </h3>
+            <p class="modern-body-lead">
+              Founded in <strong class="text-white">1965</strong>, the <strong class="text-white">Computer Society of
+                India (CSI)</strong> is the nation’s pioneer professional body dedicated to advancing computer
+              engineering, data science, and IT research.
+            </p>
+            <p class="modern-body-text">
+              At <strong class="text-white">SIES Graduate School of Technology</strong>, our Student Chapter transforms
+              this national legacy into an electric campus community. We are an elected guild of student developers,
+              designers, open-source hackers, and tech leads committed to bridging the gap between theoretical classroom
+              knowledge and industry-scale engineering.
+            </p>
+
+            <!-- Minimalist Stats Grid -->
+            <div class="cyber-stats-row">
+              <div class="cyber-stat-item">
+                <span class="cyber-stat-num">72</span>
+                <span class="cyber-stat-caption">CHAPTERS ACROSS INDIA</span>
+              </div>
+              <div class="cyber-stat-item">
+                <span class="cyber-stat-num">511</span>
+                <span class="cyber-stat-caption">STUDENT BRANCHES</span>
+              </div>
+              <div class="cyber-stat-item">
+                <span class="cyber-stat-num">100K+</span>
+                <span class="cyber-stat-caption">ACTIVE MEMBERS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="row g-4">
+              <!-- Card 1: Modern Glass Emblem Showcase -->
+              <div class="col-md-6">
+                <div class="csi-emblem-showcase-card h-100">
+                  <div class="emblem-card-inner text-center">
+                    <div class="emblem-icon-wrapper">
+                      <img decoding="async" src="images/csi-emblem.svg" alt="CSI Emblem" class="csi-emblem-svg" />
+                    </div>
+                    <h4 class="emblem-card-title">CSI NATIONAL</h4>
+                    <p class="emblem-card-sub">Est. 1965 &bull; India's IT Heritage</p>
+                    <div class="emblem-card-points">
+                      <div class="emblem-point-row">
+                        <span class="point-glow-dot"></span>
+                        <span>Student Chapter Guild</span>
+                      </div>
+                      <div class="emblem-point-row">
+                        <span class="point-glow-dot"></span>
+                        <span>National Competitions</span>
+                      </div>
+                      <div class="emblem-point-row">
+                        <span class="point-glow-dot"></span>
+                        <span>Engineering &amp; Labs</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Chapter Activities / Orientation Photo Showcase -->
+              <div class="col-md-6">
+                <div class="csi-photo-showcase-card h-100">
+                  <div class="csi-photo-frame">
+                    <img decoding="async" src="images/ori (1).jpg" alt="CSI Chapter Orientation" class="csi-photo-img" loading="lazy" />
+                    <div class="csi-photo-overlay"></div>
+                    <div class="csi-photo-caption">
+                      <span class="csi-photo-tag">// CAMPUS ENGAGEMENT</span>
+                      <h4 class="csi-photo-title">Community &amp; Culture</h4>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="custom-shape-divider-bottom-1660889963">
-          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path
-              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-              class="shape-fill"></path>
-          </svg>
-        </div>
-      </section>
+      </div>
+
+
     </div>
+  </section>
 
-    <!-- HERO ENDS -->
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
 
-  </div>
+  <!-- MAGAZINE SECTION (02. ANNUAL PUBLICATION) -->
+  <div id="magzine" class="mag-section">
+    <div class="mag-glow-orb mag-glow-orb--1"></div>
+    <div class="mag-glow-orb mag-glow-orb--2"></div>
 
-  <!---about-->
+    <div class="mag-hero">
+      <!-- Content Side (Left) -->
+      <div class="mag-content">
+        <div class="mag-header">
+          <div class="mag-header__badge">
+            <span class="mag-header__dot"></span>
+            <span class="mag-header__label">OFFICIAL PUBLICATION</span>
+          </div>
+          <h2 class="mag-header__title">
+            <span class="mag-title-main">MEGABYTE</span>
+            <span class="mag-title-sub">2026 EDITION</span>
+          </h2>
+          <p class="mag-header__sub">The Flagship Technical Magazine of CSI SIESGST</p>
+        </div>
 
-  <div class="container">
-    <div id="cm" class="inovation-card-main u-clearfix1">
-      <div class="hm">
-        <h2 id="headingm">ABOUT US</h2>
-      </div>
-      <div class="innerdiv">
-
-        <div class="inovation-inner-card-text">
-
-
-          <span id="cdm" class="inovation-inner-card-description">
-            <div class="hm" id="heading1">
-              <h2>WHAT IS CSI ?</h2>
-            </div>
-            <p class="para-box__modifier">
-              The Computer Society of India has come a long way since its foundation in 1965. The founding members felt
-              the need to organize their activities and also wanted to share their knowledge and exchange ideas about
-              the computer sector which was then newly emerging. Today the CSI takes pride in being the largest and most
-              professionally managed association of and for IT professionals in India. It has 72 chapters across India,
-              511 student branches, and 100,000 members. The purpose of the Society are, Scientific and Educational
-              directed towards the advancement of the theory and practice of computer science and IT.
+        <div class="mag-desc-list">
+          <div class="mag-desc-item mag-desc-item--cyan">
+            <h4 class="mag-desc-item__title">ABOUT THIS EDITION</h4>
+            <p class="mag-desc-item__text">
+              Welcome to the second edition of <span class="mag-highlight">MEGABYTE</span> — the official technical magazine of the <span class="mag-highlight">CSI Student Chapter of SIESGST</span>. A culmination of relentless effort, creative vision, and the collective passion of our editorial team.
             </p>
-          </span>
-        </div>
-        <div class="imagem">
-          <video id="v2" class="imgm" width="82%" height=40% autoplay loop muted>
-            <source src="images/1.mp4" type="video/mp4" />
+          </div>
 
-          </video>
+          <div class="mag-desc-item mag-desc-item--gold">
+            <h4 class="mag-desc-item__title">INSIDE THE ISSUE</h4>
+            <p class="mag-desc-item__text">
+              Explore breakthroughs in open-source tech, Indian IT advancements, sustainable innovations, and exclusive alumni interviews bridging technical and creative domains.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="innerdiv" id="i2">
-        <div class="imagem">
-          <video id="v2" class="imgm" width="82%" height=auto autoplay loop muted>
-            <source src="images/2.mp4" type="video/mp4" />
 
-          </video>
-        </div>
-
-        <div class="inovation-inner-card-text">
-
-
-          <span id="cdm" class="inovation-inner-card-description">
-            <div class="hm">
-              <h2>WHAT WE DO ?</h2>
-            </div>
-            <p class="para-box__modifier">
-              The CSI Campus Chapter of SIES-GST is a part of the well established network of student branches across
-              the country. The Chapter activities are managed by a committee of elected members. The Chapter annually
-              conducts INNOVATIONS, a National Level Technical Project Competition. Additionally, various workshops,
-              seminars, programming contests, are conducted for the members of the CSI Campus Chapter. The idea is to
-              spread the knowledge, and provide opportunities to as many interested as possible.
-            </p>
-          </span>
-        </div>
+      <!-- Magazine Flipbook (Right) -->
+      <div class="mag-flipbook-container">
+        <div class="mag-cover__glow"></div>
+        <div id="megabyte-flipbook" class="mag-flipbook-box"></div>
       </div>
     </div>
   </div>
-  <!-- </div>
-  </div>   -->
 
-  <!---magzine-->
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
 
-  <div id="magzine" class="container" style="max-width: 1250px;">
-    <div id="cm" class="inovation-card-main u-clearfix1">
-      <div class="hm">
-        <h2 id="headingm" style="margin-top: 2%;">MAGAZINE 2K25 EDITION</h2>
+  <!-- HIGHLIGHTS SECTION (03. MOMENTS & ARCHIVES) -->
+  <section id="highlights" class="modern-content-section">
+    <div class="container modern-section-container">
+      <div class="modern-section-header" data-aos="fade-up">
+        <div class="modern-section-tag">
+          <span class="section-tag-name">MOMENTS &amp; ARCHIVES</span>
+        </div>
+        <h2 class="modern-section-title">CHAPTER HIGHLIGHTS</h2>
+        <p class="modern-section-sub">A glimpse into our high-octane events, workshops, hackathons, and celebrations.
+        </p>
       </div>
-      <div class="inovation-inner-card-text">
 
-
-        <span id="cdm" class="inovation-inner-card-description">
-          <p class="para-box__modifier">
-            Welcome to the second edition of <b>MEGABYTE</b>, the official technical magazine of the <b>CSI Student
-              Chapter of SIES Graduate School of Technology</b>. We
-            stepped into this challenging arena with the motive of learning something
-            new. Putting together a magazine is no cake walk and the finished product
-            that you hold is the result of the efforts put in by the entire Magazine Team.
-            <br>
-            <br>
-            <b>MEGABYTE</b> basically denotes the purpose of the magazine that is to chronicle different technological
-            developments around the world, along with extraordinary achievements of the students of SIES GST.
-            <br>
-            <br>
-            This issue brings to you diverse articles such as open source Technologies,
-            advancements in Indian IT industry, sustainable inventions, etc. In addition
-            to this, we have exclusive interviews with our very own alumni’s working in
-            Technical and Non technical fields. The contributions made by the authors
-            of articles in this Magazine are invaluable. Do keep your eyes on this magazine in the upcoming years.
-            Everything we do derives from its long-standing character, approach and quality – while we continue to
-            produce the further editions with as much love as ever.
-          </p>
-        </span>
-
+      <div class="image-slider" data-aos="fade-up">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img decoding="async" src="images/H (1).jpg" alt="Highlight 1" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (2).jpg" alt="Highlight 2" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (3).jpg" alt="Highlight 3" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (4).jpg" alt="Highlight 4" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (5).jpg" alt="Highlight 5" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (6).jpg" alt="Highlight 6" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (7).jpg" alt="Highlight 7" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (8).jpg" alt="Highlight 8" loading="lazy" /></div>
+            <div class="swiper-slide"><img decoding="async" src="images/H (9).jpeg" alt="Highlight 9" loading="lazy" /></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next buttons"></div>
+          <div class="swiper-button-prev buttons"></div>
+        </div>
       </div>
-      <div class="imagem">
-        <img class="imgm" src="images/magzine.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
+
+  <!-- ============================================================
+       EVENTS SECTION (SYSTEM EVENT_LOG ARCHIVE)
+       ============================================================ -->
+  <section id="event" class="events-section">
+    <!-- Top Header matching Reference -->
+    <div class="events-top-header">
+      <div class="terminal-pill-badge"><span class="pulse-dot"></span> SYS.EVENT_LOG // ARCHIVE</div>
+      <div class="events-header-row">
+        <div class="events-title-box">
+          <h1 class="events-main-title">SYSTEM <span class="highlight-cyan">EVENTS</span></h1>
+          <p class="events-main-desc">EXPLORE WHAT WE BUILD, HOST &amp; EXPERIENCE.</p>
+        </div>
       </div>
-      <div class="buttonm">
-        <button class="btnm"> <a id="linkm" href="https://online.fliphtml5.com/vxsxt/ilcm/"> Explore Magazine</a>
+    </div>
+
+    <!-- Filter Bar matching Reference -->
+    <div class="events-filter-bar">
+      <div class="filter-btn-group" id="filterBtnGroup">
+        <button class="filter-chip-btn active" id="filterBtnEvents" onclick="filterEvents('events', this)">
+          EVENTS <span class="chip-count">(6)</span>
         </button>
-        <!-- <button class="btnm"> <a id="linkm" href="https://online.fliphtml5.com/vxsxt/tgql/"> Explore Magazine</a>
-        </button> -->
+        <button class="filter-chip-btn" id="filterBtnWorkshops" onclick="filterEvents('workshops', this)">
+          WORKSHOPS <span class="chip-count">(8)</span>
+        </button>
+        <div class="filter-tab-indicator" id="filterTabIndicator"></div>
       </div>
     </div>
-  </div>
 
-  <!-- image gallery -->
+    <!-- ============================================================
+         3-COLUMN CHRONOLOGICAL EVENT STREAM (MOST RECENT FIRST)
+         ============================================================ -->
+    <div class="events-3col-grid">
 
-  <h1 id="headingh">HIGHLIGHTS</h1>
-
-  <section class="image-slider">
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="images/H (1).jpg">
+      <!-- 01: INNOVATION 2026 -->
+      <article id="innovations" class="log-event-card" data-category="event flagship">
+        <div class="log-card-media" onclick="openEventGallery('innovation-2026')">
+          <img decoding="async" src="assets/events/innovation-2026/innovation-2026-pic-1.jpg" alt="Innovation 2026 Presentation" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 10 Photos</span>
         </div>
-        <div class="swiper-slide">
-          <img src="images/H (2).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (3).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (4).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (5).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (6).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (7).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (8).jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/H (9).jpeg">
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-next buttons"></div>
-      <div class="swiper-button-prev buttons"></div>
-    </div>
-
-  </section>
-
-
-  <!--   event   -->
-  <div id="event">
-    <h1 id="headingh">WORKSHOPS CONDUCTED</h1>
-
-    <ul class="event-card-grid">
-      <li>
-        <a class="event-card-solo">
-          <img src="images/CYBER_workshop.jpg" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">Cybersecurity</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">Cybersecurity is one of the most crucial domains in today’s digital
-              world. This workshop was focused on explaining the basics of cybersecurity and how different techniques
-              can be used to protect systems, networks, and data from malicious threats and attacks.</p>
+        <div class="log-card-body">
+          <h3 class="log-card-title">INNOVATION 2026</h3>
+          <p class="log-card-desc">
+            INNOVATION 2026 was a national-level project presentation competition by CSI SIESGST, providing a platform for students to showcase innovative projects, research, prototypes, and ideas. The event celebrated creativity, technology, and problem-solving while connecting student innovation with real-world opportunities.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('innovation-2026')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
           </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/DSA_Workshop.jpg" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">DSA (Data Structures and Algorithms)</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">DSA is the foundation of programming and problem-solving. This
-              workshop was focused on explaining the basics of data structures and algorithms and how they are used to
-              write efficient programs and solve real-world computational problems.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/IOT_Workshop.jpg" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">IoT (Internet of Things)</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">IoT is one of the fastest-growing technologies that connects devices
-              and enables them to communicate with each other. This workshop was focused on explaining the basics of IoT
-              and how smart systems can be built using sensors, actuators, and microcontrollers.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-bootstrap.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">BOOTSTRAP</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">Bootstrap is a simple and easy-to-use library to apply styles on
-              webpages. This workshop was focused on explaining the basics of the library and showing the
-              power of it.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-django.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">DJANGO</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">Django is one the most popular framework. This workshop was focused
-              on explaining the basics of Django and how a huge website can be built using it.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-angular.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">ANGULAR 5</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">Angular is one the most popular framework. This workshop was
-              focused on explaining the basics of Angular and how a complete full-stack web application
-              can be built
-              using it.</p>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-basicpro.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">BASIC PROGRAMMING</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">The most essential part of learning to code is to know how to think
-              logically about the problem. The workshop was focused on guiding the members on how to
-              approach the problem in the most optimal way.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-aws.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">CLOUD COMPUTING AND FUNDAMENTAL OF AWS</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">The most essential part of learning to code is to know how to think
-              logically about the problem. The workshop was focused on guiding the members on how to
-              approach the problem in the most optimal way.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="event-card-solo">
-          <img src="images/e-placement.png" class="event-card-image-solo" alt="" />
-          <div class="event-card-overlay">
-            <div class="event-card-header">
-              <svg class="event-card-arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <div class="event-card-header-text">
-                <h3 class="event-card-title-solo">PLACEMENT GUIDANCE</h3>
-              </div>
-            </div>
-            <p class="event-card-description-solo">The most essential part of learning to code is to know how to think
-              logically about the problem. The workshop was focused on guiding the members on how to
-              approach the problem in the most optimal way.</p>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!--   /event   -->
-  <!--   counter   -->
-  <div class="container">
-    <section class="charts_orb">
-      <article class="orb">
-        <div class="orb_graphic">
-          <svg>
-            <circle class="fill"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="orb_value count">122</div>
-        </div>
-        <div class="orb_label">
-          MEMBERS
         </div>
       </article>
 
-      <article class="orb">
-        <div class="orb_graphic">
-          <svg>
-            <circle class="fill"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="orb_value count">20</div>
+      <!-- 02: ENIGMA 4.0: CHRONIX -->
+      <article id="enigma" class="log-event-card" data-category="event flagship hackathon">
+        <div class="log-card-media" onclick="openEventGallery('enigma-4')">
+          <img decoding="async" src="assets/events/enigma-4/enigma-4-pic-1.jpg" alt="Enigma 4.0: Chronix Hackathon" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 4 Photos</span>
         </div>
-        <div class="orb_label">
-          VOLUNTEERS
-        </div>
-      </article>
-
-      <article class="orb">
-        <div class="orb_graphic">
-          <svg>
-            <circle class="fill"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="orb_value count">51</div>
-        </div>
-        <div class="orb_label">
-          COUNCIL <br>MEMBERS
+        <div class="log-card-body">
+          <h3 class="log-card-title">ENIGMA 4.0: CHRONIX</h3>
+          <p class="log-card-desc">
+            ENIGMA 4.0 – CHRONIX was a national-level web development hackathon by CSI SIESGST, bringing together innovators to build impactful technology solutions. With the theme “One Event. Infinite Realities.”, participants explored real-world challenges across FinTech and HealthTech through ideation, prototyping, and pitching.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('enigma-4')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
         </div>
       </article>
 
-
-
-    </section>
-  </div>
-  <!--   /counter   -->
-
-  <!--   /enigma   -->
-  <div class="container">
-    <h1 id="headingh" style="margin-bottom: 3rem;">ENIGMA 2K25 RECAP</h1>
-    <div class="enigma-card-main u-clearfix1">
-      <div class="enigma-inner-card-text">
-        <h2 class="enigma-card-title">2K25 EVENT</h2>
-        <span class="enigma-inner-card-description">The Enigma's main goal is to raise public awareness about digital
-          security scams. Participants can explore various aspects of digital security, including but not limited to
-          online privacy, blockchain, cybersecurity, data protection, and the impact of emerging technologies. CSI
-          SIESGST is holding a Poster presentation competition to raise public awareness and provide a platform for
-          engineers, students, and privacy enthusiasts to present their solutions for the pressing digital security
-          challenges of our day and age.</span>
-        <div class="enigma-runnerup2">
-          <h3 class="enigma-card-winner">Winners</h3>
-          <h6 class="enigma-card-winner">Vaishnavi Parab</h6>
-          <h6 class="enigma-card-winner">Shravani Mankar</h6>
+      <!-- 03: SYNAPSE 1.0 -->
+      <article class="log-event-card" data-category="event hackathon">
+        <div class="log-card-media" onclick="openEventGallery('synapse-1')">
+          <img decoding="async" src="assets/events/synapse-1/synapse-1-pic-1.jpg" alt="Synapse 1.0 Simulation Experience" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 5 Photos</span>
         </div>
-        <div class="enigma-runnerup">
-          <h3 class="enigma-card-RunnerUp">Runner-Up</h3>
-          <h6 class="enigma-card-RunnerUp">Prathmesh Zingade</h6>
-          <h6 class="enigma-card-RunnerUp">Sayali Chorghe</h6>
+        <div class="log-card-body">
+          <h3 class="log-card-title">SYNAPSE 1.0</h3>
+          <p class="log-card-desc">
+            SYNAPSE 1.0 was an immersive job-simulation experience where participants stepped into the roles of an AI System Investigator and Product Strategist. Teams analysed a real-world AI system failure, identified its root cause, and redesigned the system through critical thinking, analysis, and decision-making.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('synapse-1')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="slideshow-main">
-        <img class="enigma-slideshow enigma-card-slideshow" src="images/e (1).jpg">
-        <img class="enigma-slideshow enigma-card-slideshow" src="images/e (2).jpg">
-        <img class="enigma-slideshow enigma-card-slideshow" src="images/e (3).jpg">
-        <img class="enigma-slideshow enigma-card-slideshow" src="images/e (4).jpg">
-        <img class="enigma-slideshow enigma-card-slideshow" src="images/e (5).jpg">
-        <script>
-          w3.slideshow(".enigma-slideshow", 2000);
-        </script>
-      </div>
+      </article>
+
+      <!-- 04: INNOVATION 2023 -->
+      <article class="log-event-card" data-category="event flagship">
+        <div class="log-card-media" onclick="openEventGallery('innovation-2023')">
+          <img decoding="async" src="assets/events/innovation-2023/innovation-2023-pic-1.jpg" alt="Innovations 2023 Competition" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 11 Photos</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">INNOVATIONS 2023</h3>
+          <p class="log-card-desc">
+            The landmark 2023 national competition that witnessed over 100 abstract submissions from across India in Computer Science, Information Technology, IoT, and Robotics.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('innovation-2023')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05: CYBERSECURITY WORKSHOP -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('cybersecurity-workshop')">
+          <img decoding="async" src="assets/events/cybersecurity-workshop/cybersecurity-workshop-pic-1.jpg" alt="Cybersecurity Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Cybersecurity Workshop</h3>
+          <p class="log-card-desc">
+            Explored fundamental cybersecurity concepts, network defense, threat analysis, and practical techniques to protect systems and data from malicious threats and attacks.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('cybersecurity-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06: DSA WORKSHOP -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('dsa-workshop')">
+          <img decoding="async" src="assets/events/dsa-workshop/dsa-workshop-pic-1.jpg" alt="DSA Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">DSA (Data Structures &amp; Algorithms)</h3>
+          <p class="log-card-desc">
+            Focused on core problem-solving concepts, foundational data structures, algorithmic complexity, and writing efficient computational code.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('dsa-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07: IOT WORKSHOP -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('iot-workshop')">
+          <img decoding="async" src="assets/events/iot-workshop/iot-workshop-pic-1.jpg" alt="IoT Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">IoT (Internet of Things)</h3>
+          <p class="log-card-desc">
+            A hands-on workshop explaining IoT fundamentals, microcontroller programming, sensor interfacing, and building interconnected smart hardware systems.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('iot-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08: BOOTSTRAP WORKSHOP -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('bootstrap-workshop')">
+          <img decoding="async" src="assets/events/bootstrap-workshop/bootstrap-workshop-pic-1.png" alt="Bootstrap Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Bootstrap Framework</h3>
+          <p class="log-card-desc">
+            Introduced responsive layout grids, flexbox utilities, component styling, and accelerating frontend UI design with modern CSS frameworks.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('bootstrap-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 09: DJANGO FRAMEWORK -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('django-workshop')">
+          <img decoding="async" src="assets/events/django-workshop/django-workshop-pic-1.png" alt="Django Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Django Web Framework</h3>
+          <p class="log-card-desc">
+            Explored Python-based full-stack web development, MVT architecture, ORM database modeling, routing, and scalable server-side applications.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('django-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10: ANGULAR 5 WORKSHOP -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('angular-workshop')">
+          <img decoding="async" src="assets/events/angular-workshop/angular-workshop-pic-1.png" alt="Angular Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Angular 5 Framework</h3>
+          <p class="log-card-desc">
+            Covered single-page application development, component hierarchies, two-way data binding, TypeScript integration, and modular frontend architectures.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('angular-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11: BASIC PROGRAMMING -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('basic-programming-workshop')">
+          <img decoding="async" src="assets/events/basic-programming-workshop/basic-programming-workshop-pic-1.png" alt="Basic Programming Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Basic Programming &amp; Logic</h3>
+          <p class="log-card-desc">
+            Focused on establishing logical problem formulation, control structures, functional decomposition, and writing clean, readable code.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('basic-programming-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12: CLOUD COMPUTING AND AWS -->
+      <article class="log-event-card" data-category="workshop">
+        <div class="log-card-media" onclick="openEventGallery('cloud-aws-workshop')">
+          <img decoding="async" src="assets/events/cloud-aws-workshop/cloud-aws-workshop-pic-1.png" alt="AWS Cloud Computing Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Cloud Computing &amp; AWS Fundamentals</h3>
+          <p class="log-card-desc">
+            Provided a comprehensive overview of cloud architecture, compute instances, storage buckets, security groups, and serverless deployment models on AWS.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('cloud-aws-workshop')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 13: PLACEMENT GUIDANCE -->
+      <article class="log-event-card" data-category="event seminar">
+        <div class="log-card-media" onclick="openEventGallery('placement-guidance')">
+          <img decoding="async" src="assets/events/placement-guidance/placement-guidance-pic-1.png" alt="Placement Guidance Workshop" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 1 Photo</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">Placement Guidance</h3>
+          <p class="log-card-desc">
+            A targeted mentorship session offering students insights into technical interview preparation, coding rounds, system design, and industry hiring standards.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('placement-guidance')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 14: CSI OUTREACH PROGRAM -->
+      <article id="outreach" class="log-event-card" data-category="event seminar">
+        <div class="log-card-media" onclick="openEventGallery('csi-outreach')">
+          <img decoding="async" src="assets/events/csi-outreach/csi-outreach-pic-1.jpg" alt="CSI Outreach Program" class="log-card-img" loading="lazy" />
+          <span class="badge-photo-count"><i class="ri-image-line"></i> 3 Photos</span>
+        </div>
+        <div class="log-card-body">
+          <h3 class="log-card-title">CSI Outreach Program</h3>
+          <p class="log-card-desc">
+            Conducted at SIES School, Matunga, educating school students on digital footprints, cybersecurity awareness, online safety practices, and digital responsibility.
+          </p>
+          <div class="log-card-footer">
+            <button class="btn-log-action" onclick="openEventGallery('csi-outreach')">
+              <i class="ri-gallery-line"></i> [ VIEW GALLERY ]
+            </button>
+          </div>
+        </div>
+      </article>
+
     </div>
-  </div>
-  <!--   /enigma   -->
 
-
-  <!--   /innovation   -->
-  <div class="container">
-    <h1 id="headingh" style="margin-bottom: 3rem;">INNOVATIONS 2K25 RECAP</h1>
-    <div class="inovation-card-main u-clearfix1">
-      <div class="inovation-inner-card-text">
-        <h2 class="inovation-card-title">2K25 EVENT</h2>
-        <span class="inovation-inner-card-description">INNOVATIONS is a national level project competition conducted
-          annually by the CSI Campus Chapter of SIES Graduate School of Technology. It serves as a platform for
-          young minds to take this window of opportunity and bring forward their innovative ideas in the form of
-          projects. Each year teams from various institutes all over Maharashtra as well as Other States,
-          participate in Innovations at large numbers.Innovations 2019 achieved a milestone when it received over
-          a 100 abstract submissions, a feat never seen before.The projects were from various fields such as
-          Computers, Information Technology, Electronics, Internet of Things, Robotics, Mechanical, etc.
-          Out of the received abstracts,45 projects were selected for the competition after carefully analysing
-          each project based on parameters such as novelty, effectiveness, positive impact on society and
-          scalability.</span>
-      </div>
-      <div class="slideshow-main">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (1).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (2).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (3).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (4).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (5).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (6).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (7).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (8).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (9).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (10).jpg">
-        <img class="inovation-slideshow inovation-card-slideshow" src="images/i (11).jpg">
-        <script>
-          w3.slideshow(".inovation-slideshow", 2000);
-        </script>
-      </div>
-    </div>
-  </div>
-  <!--   /inovation   -->
-
-  <!--   outreach   -->
-  <div class="container">
-    <h1 id="headingh" style="margin-bottom: 3rem;">CSI Outreach program</h1>
-    <div class="inovation-card-main u-clearfix1">
-      <div class="inovation-inner-card-text">
-        <h2 class="inovation-card-title">Outreach program</h2>
-        <span class="inovation-inner-card-description">
-          CSI SIES GST conducted a comprehensive outreach program at SIES School, Matunga,
-          enlightening students about the significance of online presence and cyber security.
-          Members from CSI SIES GST engaged students with informative sessions, emphasizing
-          the importance of managing their digital footprint, while also educating them on
-          the various online threats and practical protection strategies. Interactive workshops
-          and open discussions empowered students with essential knowledge and skills to
-          navigate the online world safely and responsibly, leaving a lasting impact on
-          their digital awareness.
+    <!-- MINIMALIST LOAD MORE / COLLAPSE BUTTON -->
+    <div class="events-load-more-container" id="eventsLoadMoreWrapper">
+      <button id="events-show-more-btn" class="cyber-show-more-btn" onclick="toggleMoreEvents()" aria-label="Toggle more events">
+        <span class="btn-inner-content">
+          <span class="show-more-count-label">SHOW MORE EVENTS</span>
+          <i class="ri-arrow-down-s-line show-more-btn-icon"></i>
         </span>
-      </div>
-      <div class="slideshow-main">
-        <img class="out-slideshow inovation-card-slideshow" src="images/ori (1).jpg">
-        <img class="out-slideshow inovation-card-slideshow" src="images/ori (2).jpg">
-        <img class="out-slideshow inovation-card-slideshow" src="images/ori (3).jpg">
-        <script>
-          w3.slideshow(".out-slideshow", 2000);
-        </script>
-      </div>
-    </div>
-  </div>
-  <!--   /outrech   -->
-
-
-  <br><br>
-  <!-- partial:index.partial.html -->
-  <section id="sponsors">
-    <h1
-      style="font-size: xx-large; text-align: center; margin-bottom: 20px;color: aliceblue;text-decoration: underline;">
-      ASSOCIATE SPONSORS
-    </h1>
-    <div class="footer-wrapper">
-      <div class="footer-marquee">
-        <div class="footer-square">
-          <a href="https://www.brainheaters.in/" target="_blank" style="text-decoration: none;"><img
-              class="footer-brain"
-              src="https://res.cloudinary.com/dghjgfbha/image/upload/v1648320535/csi-website/brain_heaters_tirlmh.png" /></a>
-        </div>
-        <div class="footer-square">
-          <a href="https://teamfullstack.tech/" target="_blank" style="text-decoration: none;"><img
-              class="footer-team_fullstack" style="margin-top: 22px !important"
-              src="https://res.cloudinary.com/dghjgfbha/image/upload/v1648320535/csi-website/Team_FullStack_kiaodc.png" /></a>
-        </div>
-        <div class="footer-square">
-          <a href="https://deltatheinnovators.com/" target="_blank" style="text-decoration: none;"><img
-              class="footer-DTI"
-              src="https://res.cloudinary.com/dghjgfbha/image/upload/v1648320535/csi-website/DTI_Cover_gbzbzp.png" /></a>
-        </div>
-      </div>
+      </button>
     </div>
   </section>
-  <section>
-    <h1
-      style="font-size: xx-large; text-align: center; margin-bottom: 20px;color: aliceblue;text-decoration: underline;">
-      PREVIOUS SPONSORS & COLLABORATORS
-    </h1>
-    <div class="footer-wrapper">
-      <div class="footer-marquee1">
-        <div class="footer-square1">
-          <a href="https://infigon.edumilestones.com/" target="_blank" style="text-decoration: none;"><img
-              class="footer-infi"
-              src="https://res.cloudinary.com/dkdmgncru/image/upload/f_auto,q_auto,dpr_auto,w_auto/v1614703156/CSI%20Files/Sponsors/infigon-logo_j5tzky.jpg" /></a>
-        </div>
-        <div class="footer-square1">
-          <a href="https://www.wolfram.com/" target="_blank" style="text-decoration: none;"><img
-              src="https://res.cloudinary.com/dkdmgncru/image/upload/f_auto,q_auto,dpr_auto,w_auto/v1614703156/CSI%20Files/Sponsors/Wolfram_xpaadh.png" /></a>
 
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
+
+  <!-- COMMUNITY IMPACT / COUNTERS (05. COMMUNITY AT A GLANCE) -->
+  <section id="impact" class="modern-content-section">
+    <div class="container modern-section-container">
+      <div class="modern-section-header text-center mx-auto" data-aos="fade-up">
+        <div class="modern-section-tag justify-content-center">
+          <span class="section-tag-name">OUR SCALE &amp; REACH</span>
         </div>
-        <div class="footer-square1">
-          <a href="https://interviewbuddy.in/" target="_blank" style="text-decoration: none;"><img
-              src="https://res.cloudinary.com/dghjgfbha/image/upload/v1648320535/csi-website/InterviewBuddy_logo_owzbdh.png" /></a>
+        <h2 class="modern-section-title">COMMUNITY IMPACT</h2>
+        <p class="modern-section-sub">Driving technical excellence, mentorship, and active student collaboration year
+          after year.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center" data-aos="fade-up">
+        <div class="col-lg-4 col-md-6">
+          <div class="modern-stat-card">
+            <div class="stat-glow-circle"></div>
+            <span class="stat-big-number count">122</span>
+            <h4 class="stat-card-title">ACTIVE MEMBERS</h4>
+            <p class="stat-card-desc">Passionate students actively engaging in hackathons, seminars, hands-on
+              masterclasses, and project sprints.</p>
+          </div>
         </div>
-        <div class="footer-square1">
-          <a href="https://www.geeksforgeeks.org/" target="_blank" style="text-decoration: none;">
-            <img class="footer-gfg" src="images/GeeksforGeeks.svg.png" />
-          </a>
+        <div class="col-lg-4 col-md-6">
+          <div class="modern-stat-card">
+            <div class="stat-glow-circle"></div>
+            <span class="stat-big-number count">20</span>
+            <h4 class="stat-card-title">STUDENT VOLUNTEERS</h4>
+            <p class="stat-card-desc">Dedicated student volunteers powering national level events, logistics, technical
+              setups, and community reach.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="modern-stat-card">
+            <div class="stat-glow-circle"></div>
+            <span class="stat-big-number count">51</span>
+            <h4 class="stat-card-title">CORE LEADERS</h4>
+            <p class="stat-card-desc">Elected executive core driving innovation, research publications, design, and
+              multi-domain engineering initiatives.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer-area">
-    <div class="main">
-      <div class="container mb-5">
-        <div class="single-footer">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.4756649763167!2d73.02088931482145!3d19.04281298710694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c3db5e2c85cd%3A0xef26c52d7d73816e!2sSIES%20Graduate%20School%20of%20Technology!5e0!3m2!1sen!2sin!4v1660030845146!5m2!1sen!2sin"
-                style="border: 0" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
+
+  <!-- SPONSORS SECTION (Modern Terminal Showcase Theme) -->
+  <section id="sponsors" class="terminal-sponsors-section">
+    <div class="container terminal-sponsors-container">
+      
+      <!-- Minimalist Editorial Section Header -->
+      <div class="cyber-about-header" data-aos="fade-up">
+        <div class="cyber-section-index">
+          <span class="index-label">PARTNERSHIP NETWORK</span>
+        </div>
+        <h2 class="cyber-about-hero-title">
+          SPONSORS.DAT
+        </h2>
+      </div>
+
+      <!-- Terminal Showcase Window Container -->
+      <div class="sponsors-terminal-frame" data-aos="fade-up">
+
+        <!-- Decorative Horizon Arc & Particles Canvas Container -->
+        <div class="sponsors-visual-canvas">
+          <svg class="sponsors-horizon-arc" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="horizonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#495796" stop-opacity="0" />
+                <stop offset="20%" stop-color="#495796" stop-opacity="0.35" />
+                <stop offset="50%" stop-color="#495796" stop-opacity="0.8" />
+                <stop offset="80%" stop-color="#495796" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#495796" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="horizonGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#495796" stop-opacity="0" />
+                <stop offset="50%" stop-color="#495796" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#495796" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M 0 110 Q 500 10 1000 110" fill="none" stroke="url(#horizonGlow)" stroke-width="8" />
+            <path d="M 0 110 Q 500 10 1000 110" fill="none" stroke="url(#horizonGrad)" stroke-width="1.8" />
+          </svg>
+          <div class="sponsors-cyber-dots" aria-hidden="true"></div>
+        </div>
+
+        <!-- Modular Sponsor Showcase Tier Groups -->
+        <div class="sponsors-showcase-content">
+
+          <!-- ASSOCIATE SPONSORS -->
+          <div class="sponsors-tier-group tier-associate-sponsors-top">
+            <div class="tier-label-wrapper">
+              <span class="tier-label"><span class="accent-slash">//</span> ASSOCIATE SPONSOR</span>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 my-auto">
-              <div class="footer-social pt-5">
-                <h5 class="mx-auto shardul" style="text-align:left"><a href="tel:9326628860"
-                    style="text-align:left ;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                      fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                    </svg></a>Dev Sharma<br>
-                  <p style="text-align:left">Chairperson</p>
-                </h5>
-                <h5 style="text-align:left" class="ananya"><a href="tel:9322734121"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                      class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                    </svg></a>Kanishka Jadhav<br>
-                  <p style="text-align:left">Secretary</p>
-                </h5>
-                <h5 style="text-align:left;" class="shruti"><a href="tel:9082885761"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                      class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                    </svg></a>Karthik Mayakrishnan <br>
-                  <p style="text-align:left">Treasurer </p>
-                </h5>
-                <a href="mailto:csi-council@siesgst.ac.in" target="_blank">
-                  <svg class="footer-csvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white"
-                    class="footer-bi bi-envelope" viewBox="0 0 16 16">
-                    <path
-                      d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                  </svg></a>
-                <a href="https://www.instagram.com/csisiesgst" target="_blank"><svg class="footer-csvg"
-                    xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white"
-                    class="footer-bi bi-instagram" viewBox="0 0 16 16">
-                    <path
-                      d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                  </svg></a>
-                <a href="https://www.facebook.com/937406819724072/" target="_blank">
-                  <svg class="footer-csvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white"
-                    class="footer-bi bi-facebook" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                  </svg></a>
+            <div class="sponsors-logo-grid tier-associate-sponsor-grid">
+              <a href="https://www.interviewbuddy.in/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="InterviewBuddy">
+                <img decoding="async" src="images/interviewbuddy-logo.svg" alt="InterviewBuddy Logo" class="sponsor-logo-img" loading="lazy" />
+              </a>
 
-                <a href="https://in.linkedin.com/company/csi-siesgst" target="_blank">
-                  <svg class="footer-csvg" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white"
-                    class="footer-bi bi-linkedin" viewBox="0 0 16 16">
-                    <path
-                      d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
-                  </svg></a>
+              <a href="https://seedglobaleducation.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SEED Global Education">
+                <img decoding="async" src="images/seed-logo.svg" alt="SEED Global Education Logo" class="sponsor-logo-img" loading="lazy" />
+              </a>
+            </div>
+          </div>
+
+          <!-- PREVIOUS SPONSORS (Continuous Infinite Marquee Loop) -->
+          <div class="sponsors-tier-group tier-previous-sponsors">
+            <div class="tier-label-wrapper">
+              <span class="tier-label"><span class="accent-slash">//</span> PREVIOUS SPONSORS</span>
+            </div>
+            
+            <div class="sponsors-marquee-container" aria-label="Previous Sponsors Marquee">
+              <div class="sponsors-marquee-track">
+                <!-- Group 1 -->
+                <div class="sponsors-marquee-group">
+                  <a href="https://seedglobaleducation.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SEED Global Education">
+                    <img decoding="async" src="images/seed-logo.svg" alt="SEED Global Education Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://imperial-overseas.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Imperial Overseas Educational Consultants">
+                    <img decoding="async" src="images/imperial-logo.svg" alt="Imperial Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://mindflixholidays.com/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Mindflix Holidays">
+                    <img decoding="async" src="images/mindflix-logo.svg" alt="Mindflix Holidays Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://www.redbull.com/in-en" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Red Bull">
+                    <img decoding="async" src="images/redbull-logo.png" alt="Red Bull Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://smaaash.in/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SMAAASH">
+                    <img decoding="async" src="images/smash-logo.svg" alt="SMAAASH Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                </div>
+
+                <!-- Group 2 (Duplicate for Seamless Infinite Loop) -->
+                <div class="sponsors-marquee-group" aria-hidden="true">
+                  <a href="https://seedglobaleducation.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SEED Global Education" tabindex="-1">
+                    <img decoding="async" src="images/seed-logo.svg" alt="SEED Global Education Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://imperial-overseas.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Imperial Overseas Educational Consultants" tabindex="-1">
+                    <img decoding="async" src="images/imperial-logo.svg" alt="Imperial Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://mindflixholidays.com/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Mindflix Holidays" tabindex="-1">
+                    <img decoding="async" src="images/mindflix-logo.svg" alt="Mindflix Holidays Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://www.redbull.com/in-en" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Red Bull" tabindex="-1">
+                    <img decoding="async" src="images/redbull-logo.png" alt="Red Bull Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://smaaash.in/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SMAAASH" tabindex="-1">
+                    <img decoding="async" src="images/smash-logo.svg" alt="SMAAASH Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                </div>
+
+                <!-- Group 3 (Duplicate for Ultra-wide / 4K seamless scroll) -->
+                <div class="sponsors-marquee-group" aria-hidden="true">
+                  <a href="https://seedglobaleducation.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SEED Global Education" tabindex="-1">
+                    <img decoding="async" src="images/seed-logo.svg" alt="SEED Global Education Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://imperial-overseas.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Imperial Overseas Educational Consultants" tabindex="-1">
+                    <img decoding="async" src="images/imperial-logo.svg" alt="Imperial Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://mindflixholidays.com/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Mindflix Holidays" tabindex="-1">
+                    <img decoding="async" src="images/mindflix-logo.svg" alt="Mindflix Holidays Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://www.redbull.com/in-en" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Red Bull" tabindex="-1">
+                    <img decoding="async" src="images/redbull-logo.png" alt="Red Bull Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://smaaash.in/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SMAAASH" tabindex="-1">
+                    <img decoding="async" src="images/smash-logo.svg" alt="SMAAASH Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                </div>
+
+                <!-- Group 4 (Duplicate for Ultra-wide / 4K seamless scroll) -->
+                <div class="sponsors-marquee-group" aria-hidden="true">
+                  <a href="https://seedglobaleducation.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SEED Global Education" tabindex="-1">
+                    <img decoding="async" src="images/seed-logo.svg" alt="SEED Global Education Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://imperial-overseas.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Imperial Overseas Educational Consultants" tabindex="-1">
+                    <img decoding="async" src="images/imperial-logo.svg" alt="Imperial Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://mindflixholidays.com/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Mindflix Holidays" tabindex="-1">
+                    <img decoding="async" src="images/mindflix-logo.svg" alt="Mindflix Holidays Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://www.redbull.com/in-en" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="Red Bull" tabindex="-1">
+                    <img decoding="async" src="images/redbull-logo.png" alt="Red Bull Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                  <a href="https://smaaash.in/" target="_blank" rel="noopener noreferrer" class="sponsor-logo-item" title="SMAAASH" tabindex="-1">
+                    <img decoding="async" src="images/smash-logo.svg" alt="SMAAASH Logo" class="sponsor-logo-img" loading="lazy" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="copy pt-4">
-      <p>&copy; 2022 Developed by Technical Team of CSI SIESGST with <svg xmlns="http://www.w3.org/2000/svg" width="16"
-          height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-        </svg></p>
+  </section>
+
+  <!-- Super Thin Faint Section Divider (35% Opacity) -->
+  <div class="terminal-section-divider"></div>
+
+  <!-- ======================================================================
+       CONTACT SECTION — 2-Column Layout (Reference-Based)
+       ====================================================================== -->
+  <section id="contact" class="terminal-contact-section">
+    <div class="container terminal-contact-container">
+
+      <!-- Minimalist Editorial Section Header (Matching SPONSORS.DAT) -->
+      <div class="cyber-about-header" data-aos="fade-up">
+        <div class="cyber-section-index">
+          <span class="index-label">GET IN TOUCH</span>
+        </div>
+        <h2 class="cyber-about-hero-title">
+          CONTACT.DAT
+        </h2>
+        <p class="cyber-about-hero-subtitle">
+          Have a question, an idea, or want to collaborate?<br />
+          Reach out to us!
+        </p>
+      </div>
+
+      <!-- 2-Column Content Layout -->
+      <div class="row g-4 g-lg-5 align-items-start" data-aos="fade-up">
+
+        <!-- LEFT COLUMN: Contact Info + Map -->
+        <div class="col-lg-6">
+
+          <!-- Contact Info Row -->
+          <div class="contact-info-row">
+            <a href="mailto:csi-council@siesgst.ac.in" class="contact-info-item">csi-council@siesgst.ac.in</a>
+            <span class="contact-info-separator">•</span>
+            <a href="tel:9322734121" class="contact-info-item">+91 93227 34121</a>
+            <span class="contact-info-separator">•</span>
+            <a href="tel:9082885761" class="contact-info-item">+91 90828 85761</a>
+          </div>
+
+          <!-- Team Members -->
+          <div class="contact-team-list">
+            <div class="team-member-row">
+              <div class="member-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #dae399;">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div class="member-details">
+                <span class="member-name">Dev Sharma</span>
+                <span class="member-role">Chairperson</span>
+              </div>
+              <a href="tel:9322734121" class="member-phone">+91 93227 34121</a>
+            </div>
+
+            <div class="team-member-row">
+              <div class="member-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #dae399;">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div class="member-details">
+                <span class="member-name">Kanishka Jadhav</span>
+                <span class="member-role">Secretary</span>
+              </div>
+              <a href="tel:9082885761" class="member-phone">+91 90828 85761</a>
+            </div>
+
+            <div class="team-member-row">
+              <div class="member-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #dae399;" >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div class="member-details">
+                <span class="member-name">Karthik Mayakrishnan</span>
+                <span class="member-role">Treasurer</span>
+              </div>
+              <a href="tel:9702433565" class="member-phone">+91 97024 33565</a>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="contact-social-row">
+            <a href="https://www.instagram.com/csisiesgst" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/937406819724072/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+              </svg>
+            </a>
+            <a href="https://in.linkedin.com/company/csi-siesgst" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+              </svg>
+            </a>
+            <a href="mailto:csi-council@siesgst.ac.in" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Map -->
+          <div class="contact-map-wrapper">
+            <span class="map-label">// LOCATION</span>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.4756649763167!2d73.02088931482145!3d19.04281298710694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c3db5e2c85cd%3A0xef26c52d7d73816e!2sSIES%20Graduate%20School%20of%20Technology!5e0!3m2!1sen!2sin!4v1660030845146!5m2!1sen!2sin"
+              allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="SIES GST Location"></iframe>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Contact Form -->
+        <div class="col-lg-6">
+          <div class="contact-form-panel">
+            <form class="cyber-contact-form" onsubmit="event.preventDefault();">
+
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Full name</label>
+                <input type="text" id="contact-name" class="cyber-form-input" placeholder="Enter your full name" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" class="cyber-form-input" placeholder="Enter your email address" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" class="cyber-form-input" placeholder="What is this regarding?" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-message">Message</label>
+                <textarea id="contact-message" class="cyber-form-textarea" rows="5" placeholder="Type your message here"></textarea>
+              </div>
+
+              <button type="submit" class="cyber-submit-btn">
+                <span>Submit</span>
+                <span class="btn-arrow">&rarr;</span>
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Divider -->
+  <div class="terminal-section-divider"></div>
+
+  <!-- ======================================================================
+       MODERN CYBER FOOTER (Reference-Based)
+       ====================================================================== -->
+  <footer class="modern-cyber-footer">
+    <div class="container footer-container">
+
+      <!-- TOP SECTION: 4-Column Layout -->
+      <div class="row g-4 g-lg-5 footer-top-grid justify-content-between">
+
+        <!-- Column 1: Mission Tagline (No Social Icons) -->
+        <div class="col-lg-4 col-md-12 footer-brand-col">
+          <p class="footer-tagline">
+            CSI SIESGST is the premier student chapter dedicated to fostering technical excellence, hands-on learning, and future-ready engineering.
+          </p>
+        </div>
+
+        <!-- Column 2: EXPLORE -->
+        <div class="col-lg-2 col-md-4 col-6 footer-nav-col">
+          <h4 class="footer-column-title">EXPLORE</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="#cm">About Us</a></li>
+            <li class="footer-link-item"><a href="#event">Events</a></li>
+            <li class="footer-link-item"><a href="#magzine">Magazine</a></li>
+            <li class="footer-link-item"><a href="team.html">Team</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: DISCOVER -->
+        <div class="col-lg-2 col-md-4 col-6 footer-nav-col">
+          <h4 class="footer-column-title">DISCOVER</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="ar-vr.html">Blogs</a></li>
+            <li class="footer-link-item"><a href="#sponsors">Sponsors</a></li>
+            <li class="footer-link-item"><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: CONNECT -->
+        <div class="col-lg-2 col-md-4 col-12 footer-nav-col">
+          <h4 class="footer-column-title">CONNECT</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="membership.html">Join CSI</a></li>
+            <li class="footer-link-item"><a href="mailto:csi-council@siesgst.ac.in">Email</a></li>
+            <li class="footer-link-item"><a href="https://www.instagram.com/csisiesgst" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li class="footer-link-item"><a href="https://in.linkedin.com/company/csi-siesgst" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li class="footer-link-item"><a href="https://www.facebook.com/937406819724072/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- CENTER SECTION: Giant Outline Brandmark Watermark -->
+      <div class="footer-watermark-wrapper">
+        <div class="footer-watermark-text">CSI SIESGST</div>
+      </div>
+
+      <!-- BOTTOM SECTION: Legal & Copyright Bar -->
+      <div class="footer-bottom-bar">
+        <p class="footer-copyright">
+          &copy; 2026 CSI SIESGST <span class="slash-sep">|</span> All rights reserved
+        </p>
+
+        <div class="footer-legal-links">
+          <a href="#terms" class="footer-legal-link">Terms of Service</a>
+          <a href="#privacy" class="footer-legal-link">Privacy Policy</a>
+        </div>
+      </div>
+
     </div>
   </footer>
 
 
-  <!-- partial -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="main.js"></script>
-  <script src="./particles.js"></script>
-  <script src="./app.js"></script>
-  <script>$(window).scroll(function () {
-      $('nav').toggleClass('scrolled', $(this).scrollTop() > 15);
-    });</script>
+  <!-- ============================================================
+       EVENT GALLERY / LIGHTBOX MODAL (CLEAN & MODERN)
+       ============================================================ -->
+  <div id="eventLightboxModal" class="event-lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+    <div class="lightbox-dialog">
+      <div class="lightbox-header">
+        <div class="lightbox-title-box">
+          <h3 id="lightboxTitle">Event Gallery</h3>
+          <p id="lightboxSubtitle">CSI SIES GST Event Highlights</p>
+        </div>
+        <button class="lightbox-close-btn" onclick="closeEventLightbox()" aria-label="Close Gallery">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <div class="lightbox-body">
+        <button class="lightbox-nav-btn lightbox-prev" onclick="prevLightboxImage()" aria-label="Previous Photo">
+          <i class="ri-arrow-left-s-line"></i>
+        </button>
+        <img decoding="async" id="lightboxMainImg" src="assets/events/innovation-2026/innovation-2026-pic-1.jpg" alt="Event Photo" class="lightbox-main-img" />
+        <button class="lightbox-nav-btn lightbox-next" onclick="nextLightboxImage()" aria-label="Next Photo">
+          <i class="ri-arrow-right-s-line"></i>
+        </button>
+      </div>
+
+      <div class="lightbox-footer">
+        <div class="lightbox-counter-strip">
+          <span id="lightboxCounter">Photo 1 of 4</span>
+          <span style="font-size: 0.8rem; color: var(--csi-text-muted);"><i class="ri-keyboard-line"></i> Use arrow keys or swipe</span>
+        </div>
+        <div id="lightboxThumbs" class="lightbox-thumbs">
+          <!-- Thumbnail strip generated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: defer for non-blocking load, luxury smooth scrolling via Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" defer></script>
+  <script src="lenis.min.js" defer></script>
+  <script src="flipbook.js" defer></script>
+  <script src="main.js?v=curtain2" defer></script>
   <script>
-    var swiper = new Swiper(".mySwiper", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      coverflowEffect: {
-        rotate: 30,
-        stretch: 0,
-        depth: 200,
-        modifier: 1,
-        slideShadows: true,
-      },
-      loop: true,
-      autoplay: {
-        delay: 2000,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
+    window.addEventListener('scroll', function () {
+      var isScrolled = (window.pageYOffset || document.documentElement.scrollTop || 0) > 15;
+      document.querySelectorAll('nav').forEach(function (n) {
+        n.classList.toggle('scrolled', isScrolled);
+      });
+    }, { passive: true });
+  </script>
+  <script>
+    function initSwiperCarousel() {
+      if (typeof Swiper === 'undefined') return;
+      var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 30,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: true,
+        },
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSwiperCarousel);
+    } else {
+      initSwiperCarousel();
+    }
   </script>
 </body>
 
